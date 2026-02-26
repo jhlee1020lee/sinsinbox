@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>맞춤견적 | 신신지업사</title>
+  <meta name="description" content="신신지업사 - 택배박스·골판지·PVC BOX 제작/납품. 표준 규격은 빠르게, 맞춤은 견적 기반으로 정확하게."/>
+  <link rel="stylesheet" href="assets/style.css"/>
+</head>
+<body>
+
+
+<div class="topbar">
+  <div class="container">
+    <div>전화 <a href="tel:02-2268-9059">02-2268-9059</a> · 이메일 <a href="mailto:sinsin4933@gmail.com">sinsin4933@gmail.com</a></div>
+    <div class="right">
+      <span>배송: 택배/퀵(부피·지역 협의) · 배송비 착불</span>
+      <a class="btn small ghost" href="quote.html">견적요청</a>
+    </div>
+  </div>
+</div>
+
+
+<header class="header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="홈으로">
+      <span class="brand-badge">SS</span>
+      <span>신신지업사<span style="display:block; font-size:12px; color:var(--muted); font-weight:650;">방산시장 포장·박스 제작/납품</span></span>
+    </a>
+
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="index.html">홈</a><a href="products.html">상품</a><a href="quote.html" style="color:var(--text); font-weight:800;">맞춤견적</a><a href="shipping.html">배송·결제</a><a href="tax.html">세금계산서</a><a href="contact.html">문의/오시는길</a>
+    </nav>
+
+    <div class="actions">
+      <a class="btn" href="products.html">상품보기</a>
+      <a class="btn primary" href="quote.html">맞춤견적 요청</a>
+      <button class="mobile-toggle" data-mobile-toggle aria-expanded="false" aria-controls="mobileNav">메뉴</button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav" data-mobile-nav>
+    <div class="container">
+      <a href="index.html">홈</a><a href="products.html">상품</a><a href="quote.html">맞춤견적</a><a href="shipping.html">배송·결제</a><a href="tax.html">세금계산서</a><a href="contact.html">문의/오시는길</a>
+    </div>
+  </div>
+</header>
+
+
+<section class="section">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">홈</a> / 맞춤견적</div>
+    <h1 class="page-title">맞춤 제작 / 대량 주문 견적요청</h1>
+    <p style="color:var(--muted); margin-top:8px;">
+      박스 제작은 규격·골(강도)·수량·인쇄/가공에 따라 단가가 달라집니다. 온라인에서는 아래 정보만 받아도 견적 정확도가 올라갑니다.
+    </p>
+
+    <div class="split" style="margin-top:18px;">
+      <div class="card">
+        <h3>견적요청 폼(샘플)</h3>
+        <form class="form" id="quoteForm">
+          <div class="field">
+            <label>품목</label>
+            <select required>
+              <option value="">선택</option>
+              <option>택배박스(골판지 박스)</option>
+              <option>D형 박스</option>
+              <option>골판지 대판(양면/편면)</option>
+              <option>PVC BOX</option>
+              <option>기타</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>규격 (가로×세로×높이 / mm)</label>
+            <input placeholder="예: 250×200×150 (내경/외경 여부도 함께)" required/>
+            <div class="help">박스는 내경/외경 기준이 혼동되기 쉬워서, 기준을 같이 적어두는 것을 추천합니다.</div>
+          </div>
+
+          <div class="field">
+            <label>골/강도(선택)</label>
+            <select>
+              <option value="">미정(추천 요청)</option>
+              <option>A골(튼튼)</option>
+              <option>B골(기본)</option>
+              <option>E골(얇음)</option>
+              <option>DW(이중골)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>수량</label>
+            <input placeholder="예: 300 / 500 / 1000" required/>
+          </div>
+
+          <div class="field">
+            <label>인쇄/가공</label>
+            <select>
+              <option>없음</option>
+              <option>1도 인쇄</option>
+              <option>컬러 인쇄</option>
+              <option>기타 가공(상담)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>희망 납기</label>
+            <input placeholder="예: 3~4영업일 / 특정 날짜" />
+          </div>
+
+          <div class="field">
+            <label>참고 파일(선택)</label>
+            <input type="file" />
+            <div class="help">실제 운영에서는 파일 업로드 저장/보안 처리가 필요합니다(서버 연동).</div>
+          </div>
+
+          <hr style="border:none; border-top:1px solid var(--border); margin:6px 0;"/>
+
+          <div class="field">
+            <label>회사명/담당자</label>
+            <input placeholder="예: ○○쇼핑몰 / 홍길동" required/>
+          </div>
+
+          <div class="field">
+            <label>연락처</label>
+            <input placeholder="예: 010-0000-0000" required/>
+          </div>
+
+          <div class="field">
+            <label>이메일</label>
+            <input type="email" placeholder="예: sample@email.com" />
+          </div>
+
+          <div class="field">
+            <label>추가 요청사항</label>
+            <textarea placeholder="배송 방식(택배/퀵), 수령지, 포장물 무게/특징, 테스트 필요 여부 등"></textarea>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn primary" type="submit">견적요청 제출(데모)</button>
+            <a class="btn" href="contact.html">바로 문의하기</a>
+          </div>
+
+          <div class="help" style="margin-top:8px;">
+            ※ 이 페이지는 “예시 폼”입니다. 실제 접수는 이메일/카카오채널/서버 연동 중 하나로 구현해야 합니다.
+          </div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3>운영 팁(실무)</h3>
+        <ul>
+          <li>온라인에 올리는 표준 상품은 <b>10~20개만</b> 먼저 운영 → 주문/문의 패턴을 보고 확장</li>
+          <li>옵션 폭이 큰 상품은 장바구니 결제보다 <b>견적요청 → 확정 금액 결제</b>가 안전</li>
+          <li>출고 기준은 “결제완료”가 아니라 <b>입금 확인</b>으로 고정 표기</li>
+          <li>배송비는 부피·거리 변수 때문에 <b>착불</b>이 현실적(필요시 지역/구간 정책 추가)</li>
+        </ul>
+
+        <div style="margin-top:16px;">
+          <a class="btn" href="products.html">표준 상품 보기</a>
+          <a class="btn" href="shipping.html">배송·결제 정책</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.getElementById('quoteForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    alert('데모 폼입니다. 실제 운영은 이메일(sinsin4933@gmail.com) 또는 카카오채널/서버 연동으로 접수하세요.');
+  });
+</script>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <div class="brand-row">
+          <span class="brand-badge">SS</span>
+          <div>
+            <div style="font-weight:800; color:var(--text);">신신지업사</div>
+            <div>방산시장 포장·박스 제작/납품</div>
+          </div>
+        </div>
+        <div>주소: 서울시 중구 을지로35길 8, 1층 (방산시장 內)</div>
+        <div>전화: <a href="tel:02-2268-9059">02-2268-9059</a> · 이메일: <a href="mailto:sinsin4933@gmail.com">sinsin4933@gmail.com</a></div>
+        <div class="small">※ 본 예시 사이트는 “레이아웃/문구” 샘플입니다. 결제/재고/배송 연동은 구현 범위에 따라 달라집니다.</div>
+      </div>
+      <div>
+        <div style="font-weight:800; color:var(--text); margin-bottom:10px;">바로가기</div>
+        <div><a href="products.html">상품</a></div>
+        <div><a href="quote.html">맞춤견적</a></div>
+        <div><a href="shipping.html">배송·결제</a></div>
+        <div><a href="tax.html">세금계산서</a></div>
+      </div>
+      <div>
+        <div style="font-weight:800; color:var(--text); margin-bottom:10px;">운영 안내</div>
+        <div>결제: 계좌이체(무통장 입금) 중심</div>
+        <div>배송: 택배/퀵(부피·거리 협의), 배송비 착불</div>
+        <div>세금계산서: 사업자등록증 + 이메일로 발행</div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="assets/site.js"></script>
+</body>
+</html>
+
