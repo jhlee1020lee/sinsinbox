@@ -10,40 +10,72 @@
 <body>
 
 
-<div class="topbar">
-  <div class="container">
-    <div>전화 <a href="tel:02-2268-9059">02-2268-9059</a> · 이메일 <a href="mailto:sinsin4933@gmail.com">sinsin4933@gmail.com</a></div>
-    <div class="right">
-      <span>배송: 택배/퀵(부피·지역 협의) · 배송비 착불</span>
-      <a class="btn small ghost" href="quote.html">견적요청</a>
+<div class="shop-utility">
+  <div class="container utility-inner">
+    <div class="utility-phone">고객센터 <a href="tel:02-2268-9059">02-2268-9059</a> (평일 09:00~18:00)</div>
+    <div class="utility-links">
+      <a href="#">로그인</a>
+      <a href="#">회원가입</a>
+      <a href="#">주문조회</a>
+      <a href="#">장바구니</a>
     </div>
+    <button class="mobile-utility-toggle" data-mobile-toggle aria-expanded="false" aria-controls="mobileNav">메뉴</button>
   </div>
 </div>
 
-
 <header class="header">
-  <div class="container">
+  <div class="container header-inner">
     <a class="brand" href="index.html" aria-label="홈으로">
       <span class="brand-badge">SS</span>
-      <span>신신지업사<span style="display:block; font-size:12px; color:var(--muted); font-weight:650;">방산시장 포장·박스 제작/납품</span></span>
+      <span>신신지업사<span class="brand-sub">방산시장 포장·박스 제작/납품</span></span>
     </a>
-
     <nav class="nav" aria-label="주요 메뉴">
-      <a href="index.html">홈</a><a href="products.html" style="color:var(--text); font-weight:800;">상품</a><a href="quote.html">맞춤견적</a><a href="shipping.html">배송·결제</a><a href="tax.html">세금계산서</a><a href="contact.html">문의/오시는길</a>
+      <a href="index.html">홈</a>
+      <a href="products.html">상품</a>
+      <a href="quote.html">맞춤견적</a>
+      <a href="shipping.html">배송·결제</a>
+      <a href="tax.html">세금계산서</a>
+      <a href="contact.html">문의/오시는길</a>
     </nav>
-
-    <div class="actions">
-      <a class="btn" href="products.html">상품보기</a>
-      <a class="btn primary" href="quote.html">맞춤견적 요청</a>
-      <button class="mobile-toggle" data-mobile-toggle aria-expanded="false" aria-controls="mobileNav">메뉴</button>
-    </div>
   </div>
   <div class="mobile-nav" id="mobileNav" data-mobile-nav>
     <div class="container">
-      <a href="index.html">홈</a><a href="products.html">상품</a><a href="quote.html">맞춤견적</a><a href="shipping.html">배송·결제</a><a href="tax.html">세금계산서</a><a href="contact.html">문의/오시는길</a>
+      <a href="index.html">홈</a>
+      <a href="products.html">상품</a>
+      <a href="quote.html">맞춤견적</a>
+      <a href="shipping.html">배송·결제</a>
+      <a href="tax.html">세금계산서</a>
+      <a href="contact.html">문의/오시는길</a>
     </div>
   </div>
 </header>
+
+<aside class="quick-sidebar" aria-label="쇼핑몰 안내 사이드바">
+  <section class="quick-box">
+    <h3>상담센터</h3>
+    <p class="quick-strong">02-2268-9059</p>
+    <p>평일 09:00~18:00</p>
+  </section>
+  <section class="quick-box">
+    <h3>입금계좌안내</h3>
+    <p>국민은행 000-00-0000-000</p>
+    <p>예금주: 신신지업사</p>
+  </section>
+  <section class="quick-box">
+    <h3>바로가기</h3>
+    <a href="quote.html">견적요청</a>
+    <a href="shipping.html">배송·결제</a>
+    <a href="contact.html">문의하기</a>
+  </section>
+  <section class="quick-box">
+    <h3>SNS</h3>
+    <a href="#">네이버 블로그</a>
+    <a href="#">카카오채널</a>
+    <a href="#">인스타그램</a>
+  </section>
+</aside>
+
+
 
 
 <section class="section">
@@ -56,7 +88,26 @@
       <span class="badge">리드타임 사양/수량에 따라 상이(견적 시 안내)</span>
     </div>
 
-    <div class="split" style="margin-top:18px;">
+    <div class="panel info-panel" style="margin-top:14px;">
+      <h3>기본 정보</h3>
+      <table class="table" aria-label="기본 정보">
+        <tr><th>상품명</th><td>택배박스 ITEM-7</td></tr>
+        <tr><th>판매가/단가</th><td>1,500원 <span style="color:var(--muted); font-size:13px;">(수량/사양에 따라 변동 가능)</span></td></tr>
+        <tr><th>배송방법</th><td>택배/퀵 협의</td></tr>
+        <tr><th>배송비</th><td>택배/퀵 협의, 기본 착불</td></tr>
+        <tr><th>최소수량</th><td>10개 부터</td></tr>
+        <tr><th>리드타임</th><td>수량/사양에 따라 변동 (상담 후 안내)</td></tr>
+      </table>
+    </div>
+
+    <nav class="product-tab-nav" aria-label="상품 상세 탭">
+      <a href="#tab-detail">상세정보</a>
+      <a href="#tab-guide">구매/배송 안내</a>
+      <a href="#tab-tax">세금계산서</a>
+      <a href="#tab-inquiry">문의</a>
+    </nav>
+
+    <div class="split product-main" id="tab-detail" style="margin-top:18px;">
       <div class="card">
         <div class="thumb" style="height:220px;">
 <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
@@ -120,7 +171,7 @@
         </div>
         
 
-        <div class="panel" style="margin-top:16px;">
+        <div class="panel" id="tab-guide" style="margin-top:16px;">
           <h3>배송·결제 안내(샘플)</h3>
           <ul>
             <li><b>결제</b>: 계좌이체(무통장) 중심. (카드 결제는 추후 도입 가능)</li>
@@ -133,6 +184,26 @@
           </div>
           <div class="notice" style="margin-top:12px; padding:12px;">※ 제작품 특성상 사양 확정 후 변경/취소가 제한될 수 있으며, 납기는 수량·가공에 따라 변동됩니다. 배송은 기본 착불입니다.</div>
         </div>
+
+        <div class="panel" id="tab-tax" style="margin-top:16px;">
+          <h3>세금계산서</h3>
+          <p class="help">사업자등록증과 수령 이메일 확인 후 발행해 드립니다. 자세한 절차는 세금계산서 안내 페이지를 확인해주세요.</p>
+          <a class="btn" href="tax.html">세금계산서 안내 보기</a>
+        </div>
+
+        <div class="panel" id="tab-inquiry" style="margin-top:16px;">
+          <h3>문의</h3>
+          <p class="help">규격/수량/인쇄 여부를 알려주시면 빠르게 상담해드립니다.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn primary" href="quote.html">견적요청</a>
+            <a class="btn" href="contact.html">전화문의</a>
+          </div>
+        </div>
+
+        <div class="sticky-cta" aria-label="빠른 문의">
+          <a class="btn primary" href="quote.html">견적요청</a>
+          <a class="btn" href="contact.html">전화문의</a>
+        </div>
       </div>
     </div>
 
@@ -142,32 +213,17 @@
 
 <footer class="footer">
   <div class="container">
-    <div class="cols">
-      <div>
-        <div class="brand-row">
-          <span class="brand-badge">SS</span>
-          <div>
-            <div style="font-weight:800; color:var(--text);">신신지업사</div>
-            <div>방산시장 포장·박스 제작/납품</div>
-          </div>
-        </div>
-        <div>주소: 서울시 중구 을지로35길 8, 1층 (방산시장 內)</div>
-        <div>전화: <a href="tel:02-2268-9059">02-2268-9059</a> · 이메일: <a href="mailto:sinsin4933@gmail.com">sinsin4933@gmail.com</a></div>
-        <div class="small">※ 본 예시 사이트는 “레이아웃/문구” 샘플입니다. 결제/재고/배송 연동은 구현 범위에 따라 달라집니다.</div>
-      </div>
-      <div>
-        <div style="font-weight:800; color:var(--text); margin-bottom:10px;">바로가기</div>
-        <div><a href="products.html">상품</a></div>
-        <div><a href="quote.html">맞춤견적</a></div>
-        <div><a href="shipping.html">배송·결제</a></div>
-        <div><a href="tax.html">세금계산서</a></div>
-      </div>
-      <div>
-        <div style="font-weight:800; color:var(--text); margin-bottom:10px;">운영 안내</div>
-        <div>결제: 계좌이체(무통장 입금) 중심</div>
-        <div>배송: 택배/퀵(부피·거리 협의), 배송비 착불</div>
-        <div>세금계산서: 사업자등록증 + 이메일로 발행</div>
-      </div>
+    <div class="footer-links">
+      <a href="contact.html">회사소개</a>
+      <a href="shipping.html">이용안내</a>
+      <a href="tax.html">개인정보</a>
+      <a href="shipping.html">이용약관</a>
+    </div>
+    <div class="footer-info">
+      <p><strong>신신지업사</strong> | 대표: 신신지업사 | 사업자등록번호: 000-00-00000</p>
+      <p>주소: 서울시 중구 을지로35길 8, 1층 (방산시장 內) | 전화: 02-2268-9059 | 이메일: sinsin4933@gmail.com</p>
+      <p>결제: 계좌이체(무통장 입금) / 배송: 택배·퀵(부피·거리 협의), 기본 착불 / 세금계산서 발행 가능</p>
+      <p class="small">© 신신지업사. 본 페이지는 샘플 정적 사이트로 실제 운영 정책은 상이할 수 있습니다.</p>
     </div>
   </div>
 </footer>
