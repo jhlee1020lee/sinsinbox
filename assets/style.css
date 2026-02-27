@@ -334,10 +334,10 @@ label { display: block; font-weight: 700; margin-bottom: 6px; }
 .product-basic-info td { width: 34%; }
 
 .product-order-panel {
-  position: sticky;
-  top: 108px;
+  position: static;
+  top: auto;
 }
-.product-sticky-cta { position: static; }
+.product-sticky-cta { position: static; top: auto; }
 .product-sticky-cta {
   margin-top: 12px;
 }
