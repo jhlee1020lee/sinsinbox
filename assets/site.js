@@ -9,4 +9,23 @@
       mobileNav.classList.toggle('is-open', !expanded);
     });
   }
+
+  const tabLinks = [...document.querySelectorAll('.product-tabs a[href^="#"]')];
+  if (tabLinks.length) {
+    const setActive = () => {
+      const current = window.location.hash || '#detail-info';
+      tabLinks.forEach((link) => {
+        link.classList.toggle('is-active', link.getAttribute('href') === current);
+      });
+    };
+
+    tabLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        setTimeout(setActive, 0);
+      });
+    });
+
+    window.addEventListener('hashchange', setActive);
+    setActive();
+  }
 })();

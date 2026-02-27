@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8"/>
@@ -88,6 +88,17 @@
       <span class="badge">리드타임 1일</span>
     </div>
 
+    
+
+    <section class="panel product-basic-info" aria-label="기본 정보" style="margin-top:16px;">
+      <h2 class="section-subtitle">기본 정보</h2>
+      <table class="table">
+        <tr><th>상품명</th><td>골판지 (양면) G-SKA</td><th>판매가/단가</th><td>3,000원 (수량/사양에 따라 변동 가능)</td></tr>
+        <tr><th>배송방법</th><td>택배/퀵 협의, 기본 착불</td><th>배송비</th><td>기본 착불</td></tr>
+        <tr><th>최소수량</th><td>10개 부터</td><th>리드타임</th><td>수량/사양에 따라 변동 (상담 후 안내)</td></tr>
+      </table>
+    </section>
+
     <div class="split" style="margin-top:18px;">
       <div class="card">
         <div class="thumb" style="height:220px;">
@@ -113,7 +124,7 @@
       </div>
 
       <div>
-        <div class="panel">
+        <div class="panel product-order-panel">
           <h3>주문/견적</h3>
           <div class="help">실제 운영은 “표준품 바로 주문 + 맞춤은 견적”으로 분리하는 것을 추천합니다.</div>
 
@@ -152,6 +163,14 @@
         </div>
         
 
+        <div class="panel product-sticky-cta">
+          <h3>빠른 상담</h3>
+          <div style="display:grid; gap:8px;">
+            <a class="btn primary" href="quote.html">견적요청</a>
+            <a class="btn" href="tel:02-2268-9059">전화문의</a>
+          </div>
+        </div>
+
         <div class="panel" style="margin-top:16px;">
           <h3>배송·결제 안내(샘플)</h3>
           <ul>
@@ -167,6 +186,55 @@
         </div>
       </div>
     </div>
+
+    <nav class="product-tabs" aria-label="상품 정보 탭">
+      <a href="#detail-info">상세정보</a>
+      <a href="#shipping-guide">구매/배송 안내</a>
+      <a href="#tax-guide">세금계산서</a>
+      <a href="#inquiry-guide">문의</a>
+    </nav>
+
+    <section id="detail-info" class="panel tab-anchor-section">
+      <h3>상세정보</h3>
+      <p class="help">제품의 규격과 재질은 아래 핵심 사양을 기준으로 확인해 주세요.</p>
+      <table class="table">
+        <tr><th>상품명</th><td>골판지 (양면) G-SKA</td></tr>
+        <tr><th>판매가/단가</th><td>3,000원 (수량/사양에 따라 변동 가능)</td></tr>
+        <tr><th>최소수량</th><td>10개 부터</td></tr>
+        <tr><th>리드타임</th><td>수량/사양에 따라 변동 (상담 후 안내)</td></tr>
+      </table>
+    </section>
+
+    <section id="shipping-guide" class="panel tab-anchor-section">
+      <h3>구매/배송 안내</h3>
+      <ul>
+        <li>주문 전 수량/규격 확인 후 견적요청을 진행해 주세요.</li>
+        <li>배송방법: 택배/퀵 협의, 기본 착불</li>
+        <li>배송비: 기본 착불 (부피·거리 기준 협의 가능)</li>
+      </ul>
+      <a class="btn" href="shipping.html">배송·결제 상세</a>
+    </section>
+
+    <section id="tax-guide" class="panel tab-anchor-section">
+      <h3>세금계산서</h3>
+      <p>사업자 등록증과 이메일 주소를 전달해 주시면 전자세금계산서 발행을 도와드립니다.</p>
+      <a class="btn" href="tax.html">세금계산서 안내</a>
+    </section>
+
+    <section id="inquiry-guide" class="panel tab-anchor-section">
+      <h3>문의</h3>
+      <p>대량 발주/맞춤 제작은 견적요청 또는 전화 상담으로 빠르게 안내해 드립니다.</p>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn primary" href="quote.html">견적요청</a>
+        <a class="btn" href="tel:02-2268-9059">전화문의</a>
+      </div>
+    </section>
+
+    <div class="mobile-sticky-cta" aria-label="빠른 문의">
+      <a class="btn primary" href="quote.html">견적요청</a>
+      <a class="btn" href="tel:02-2268-9059">전화문의</a>
+    </div>
+
 
   </div>
 </section>
