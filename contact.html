@@ -12,7 +12,7 @@
 
 <div class="shop-utility">
   <div class="container utility-inner">
-    <div class="utility-phone">고객센터 <a href="tel:02-2268-9059">02-2268-9059</a> (평일 09:00~18:00)</div>
+    <div class="utility-phone">고객센터 대표번호 <a href="tel:02-2269-4933">02-2269-4933</a> (보조번호 <a href="tel:02-2268-9059">02-2268-9059</a>)</div>
     <div class="utility-links">
       <a href="products.html">상품보기</a>
       <a href="quote.html">견적요청</a>
@@ -54,42 +54,88 @@
 <section class="section">
   <div class="container">
     <div class="breadcrumb"><a href="index.html">홈</a> / 문의/오시는길</div>
-    <h1 class="page-title">문의 / 오시는 길</h1>
-    <p style="color:var(--muted); margin-top:8px;">
-      아래 정보는 업로드된 엑셀 메모를 기준으로 작성했습니다. 전화번호/주소는 최종 확인 후 확정 표기하세요.
-    </p>
+    <nav class="contact-local-nav" aria-label="문의 페이지 내비게이션">
+      <a href="#access">오시는 길</a>
+      <a href="#visit">방문 안내</a>
+      <a href="#contact">문의</a>
+    </nav>
 
-    <div class="split" style="margin-top:18px;">
-      <div class="card">
-        <h3>연락처</h3>
-        <table class="table">
-          <tr><th style="width:140px;">상호</th><td>신신지업사</td></tr>
-          <tr><th>주소</th><td>서울시 중구 을지로35길 8, 1층 (방산시장 內)</td></tr>
-          <tr><th>전화</th><td><a href="tel:02-2268-9059">02-2268-9059</a></td></tr>
-          <tr><th>이메일</th><td><a href="mailto:sinsin4933@gmail.com">sinsin4933@gmail.com</a></td></tr>
-        </table>
-
-        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-          <a class="btn primary" href="quote.html">견적요청</a>
-          <a class="btn" href="products.html">상품 보기</a>
+    <div class="contact-page-shell">
+      <div class="contact-hero">
+        <div>
+          <h1 class="page-title">문의 / 오시는 길</h1>
+          <p class="contact-copy text-measure">방문 수령, 매장 방문, 제품 문의에 필요한 정보를 한곳에 정리했습니다. 오시기 전 연락 주시면 준비 가능한 품목과 수령 방법을 더 빠르게 안내해드립니다.</p>
         </div>
+        <figure class="contact-photo">
+          <img src="assets/images/home/storefront.jpg" alt="신신지업사 매장 전경"/>
+        </figure>
       </div>
 
-      <div class="panel">
-        <h3>방문/픽업 안내</h3>
-        <ul>
-          <li>대량 주문/급한 납품은 방문/픽업이 더 빠를 수 있습니다.</li>
-          <li>부피가 큰 골판지/박스는 차량 진입/상하차 동선이 중요합니다.</li>
-          <li>사이트에 “주차/픽업 위치” 사진 3~5장을 올리면 문의가 줄어듭니다.</li>
-        </ul>
+      <section class="contact-section" id="access" aria-labelledby="access-title">
+        <h2 class="contact-section-head" id="access-title">오시는 길</h2>
+        <address class="contact-copy">서울 중구 을지로35길 8, 1층 (방산시장 내)</address>
+        <p class="contact-copy">신신지업사는 방산시장 안쪽 골목에 있습니다. 처음 방문하시는 경우에는 매장명과 함께 도로명 주소를 확인하고 오시면 찾기 수월합니다.</p>
+        <p class="contact-copy">지하철로 오실 때에는 2·5호선 을지로4가역에서 방산시장 방향으로 들어오시면 가깝고, 1호선 종로5가역에서도 도보로 이동하실 수 있습니다. 버스는 ‘을지로5가’ 또는 ‘을지로5가·중부시장’ 정류장을 이용하시면 편합니다.</p>
+      </section>
 
-        <div class="panel" style="margin-top:14px;">
-          <div style="font-weight:800; margin-bottom:6px;">지도 임베드(추가 구현)</div>
-          <div style="color:var(--muted); font-size:14px;">
-            네이버지도/카카오맵 링크 또는 임베드를 붙이면 됩니다. (예: “네이버 플레이스 링크” 버튼 추가)
+      <section class="contact-section" id="visit" aria-labelledby="visit-title">
+        <h2 class="contact-section-head" id="visit-title">방문 안내</h2>
+        <p class="contact-copy">방문 수령은 가능합니다. 골판지와 박스는 수량이나 부피에 따라 준비 시간이 달라질 수 있어, 방문 전에 전화로 품목과 수량을 먼저 알려주시면 더 빠르게 안내해드립니다.</p>
+        <div class="contact-detail-grid">
+          <div class="contact-detail-item">
+            <div class="contact-detail-label">방문 수령</div>
+            <div class="contact-detail-value">방문 수령 가능</div>
+          </div>
+          <div class="contact-detail-item">
+            <div class="contact-detail-label">방문 전 안내</div>
+            <div class="contact-detail-value">방문 전 전화 문의 권장</div>
+          </div>
+          <div class="contact-detail-item">
+            <div class="contact-detail-label">상담 시간</div>
+            <div class="contact-detail-value">평일 09:00~18:00</div>
+          </div>
+          <div class="contact-detail-item">
+            <div class="contact-detail-label">배송 방식</div>
+            <div class="contact-detail-value">택배 또는 퀵 / 기본 착불</div>
+          </div>
+          <div class="contact-detail-item">
+            <div class="contact-detail-label">출고 안내</div>
+            <div class="contact-detail-value">가능 품목은 <span class="keep-korean">입금 확인</span> 후 순차 출고</div>
+          </div>
+          <div class="contact-detail-item">
+            <div class="contact-detail-label">맞춤 제작</div>
+            <div class="contact-detail-value">규격·수량·인쇄 여부 확인 후 제작 일정 안내</div>
           </div>
         </div>
-      </div>
+        <p class="contact-copy">표준 규격 상품은 재고 상황에 따라 빠르게 출고하고, 맞춤 제작은 사양 확인 후 일정을 안내해드립니다.</p>
+      </section>
+
+      <section class="contact-section" id="contact" aria-labelledby="contact-title">
+        <h2 class="contact-section-head" id="contact-title">문의</h2>
+        <p class="contact-copy">전화, 이메일 또는 맞춤견적 페이지를 통해 문의하실 수 있습니다. 대량 주문이나 규격 상담은 필요한 수량과 용도를 함께 알려주시면 안내가 더 빨라집니다.</p>
+        <div class="contact-detail-grid">
+          <div class="contact-detail-item">
+            <div class="contact-detail-label">대표번호</div>
+            <div class="contact-detail-value"><a href="tel:02-2268-9059">02-2268-9059</a></div>
+          </div>
+          <div class="contact-detail-item">
+            <div class="contact-detail-label">이메일</div>
+            <div class="contact-detail-value"><a href="mailto:sinsin4933@gmail.com">sinsin4933@gmail.com</a></div>
+          </div>
+          <div class="contact-detail-item">
+            <div class="contact-detail-label">견적 문의</div>
+            <div class="contact-detail-value"><span class="keep-korean">맞춤견적 페이지</span> 또는 <span class="keep-korean">전화·이메일 접수</span></div>
+          </div>
+          <div class="contact-detail-item">
+            <div class="contact-detail-label">세금계산서 안내</div>
+            <div class="contact-detail-value">주문 후 <span class="keep-korean">사업자등록증</span>과 <span class="keep-korean">발행받을 이메일</span>을 보내주시면 확인 후 안내해드립니다.</div>
+          </div>
+        </div>
+        <div class="contact-actions">
+          <a class="btn primary" href="quote.html">맞춤견적 바로가기</a>
+          <a class="btn" href="products.html">상품 보러가기</a>
+        </div>
+      </section>
     </div>
   </div>
 </section>
@@ -104,9 +150,10 @@
       <a href="shipping.html">이용약관</a>
     </div>
     <div class="footer-info">
-      <p><strong>신신지업사</strong> | 대표: 신신지업사 | 사업자등록번호: 000-00-00000</p>
-      <p>주소: 서울시 중구 을지로35길 8, 1층 (방산시장 內) | 전화: 02-2268-9059 | 이메일: sinsin4933@gmail.com</p>
-      <p>결제: 계좌이체(무통장 입금) / 배송: 택배·퀵(부피·거리 협의), 기본 착불 / 세금계산서 발행 가능</p>
+      <p><strong>신신지업사</strong></p>
+      <p>주소: 서울 중구 을지로35길 8, 1층 (방산시장 내)<br/>대표번호: <a href="tel:02-2268-9059">02-2268-9059</a> | 이메일: <a href="mailto:sinsin4933@gmail.com">sinsin4933@gmail.com</a></p>
+      <p>상담 시간: 평일 09:00~18:00<br/>배송 방식: 택배 또는 퀵 / 기본 착불</p>
+      <p>견적 문의: <span class="keep-korean">맞춤견적 페이지</span> 또는 <span class="keep-korean">전화·이메일 접수</span><br/>세금계산서 안내: 주문 후 <span class="keep-korean">사업자등록증</span>과 <span class="keep-korean">발행받을 이메일</span>을 보내주시면 확인 후 안내해드립니다.</p>
       <p class="small">© 신신지업사. 문의는 전화 또는 이메일로 부탁드립니다.</p>
     </div>
   </div>
