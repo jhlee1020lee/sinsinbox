@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>문의/오시는길 | 신신지업사</title>
-  <meta name="description" content="신신지업사 - 택배박스·골판지 제작/납품. 표준 규격은 빠르게, 맞춤은 견적 기반으로 정확하게."/>
+  <title>문의·오시는길 | 신신지업사</title>
+  <meta name="description" content="대표번호·보조번호, 영업시간, 주소, 방문수령 안내와 오시는 길 정보를 제공합니다."/>
+  <meta property="og:title" content="문의·오시는길 | 신신지업사"/>
+  <meta property="og:description" content="대표번호·보조번호, 영업시간, 주소, 방문수령 안내와 오시는 길 정보를 제공합니다."/>
   <link rel="stylesheet" href="assets/style.css"/>
 </head>
 <body>
@@ -73,7 +75,13 @@
 
       <section class="contact-section" id="access" aria-labelledby="access-title">
         <h2 class="contact-section-head" id="access-title">오시는 길</h2>
-        <address class="contact-copy">서울 중구 을지로35길 8, 1층 (방산시장 내)</address>
+        <address class="contact-copy">서울 중구 을지로35길 8, 1층(방산시장 내)</address>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 8px;">
+          <button class="btn" type="button" id="copyAddressBtn">주소 복사</button>
+          <a class="btn" href="https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EC%9D%84%EC%A7%80%EB%A1%9C35%EA%B8%B8%208" target="_blank" rel="noopener noreferrer">네이버 지도 검색</a>
+          <a class="btn" href="https://map.kakao.com/?q=%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EC%9D%84%EC%A7%80%EB%A1%9C35%EA%B8%B8%208" target="_blank" rel="noopener noreferrer">카카오맵 검색</a>
+          <span id="copyAddressMsg" style="align-self:center; color:var(--muted); font-size:13px;"></span>
+        </div>
         <p class="contact-copy">신신지업사는 방산시장 안쪽 골목에 있습니다. 처음 방문하시는 경우에는 매장명과 함께 도로명 주소를 확인하고 오시면 찾기 수월합니다.</p>
         <p class="contact-copy">지하철로 오실 때에는 2·5호선 을지로4가역에서 방산시장 방향으로 들어오시면 가깝고, 1호선 종로5가역에서도 도보로 이동하실 수 있습니다. 버스는 ‘을지로5가’ 또는 ‘을지로5가·중부시장’ 정류장을 이용하시면 편합니다.</p>
       </section>
@@ -92,11 +100,15 @@
           </div>
           <div class="contact-detail-item">
             <div class="contact-detail-label">상담 시간</div>
-            <div class="contact-detail-value">평일 09:00~18:00</div>
+            <div class="contact-detail-value">평일 08:00~18:00<br/>토요일·공휴일 08:00~14:00<br/>일요일 휴무</div>
           </div>
           <div class="contact-detail-item">
             <div class="contact-detail-label">배송 방식</div>
-            <div class="contact-detail-value">택배 또는 퀵 / 기본 착불</div>
+            <div class="contact-detail-value">퀵 / 택배 / 방문수령 (배송비 기본 착불)</div>
+          </div>
+          <div class="contact-detail-item">
+            <div class="contact-detail-label">방문수령 절차</div>
+            <div class="contact-detail-value">전화 문의 → 품목/수량 확인 → 방문수령</div>
           </div>
           <div class="contact-detail-item">
             <div class="contact-detail-label">출고 안내</div>
@@ -112,10 +124,14 @@
 
       <section class="contact-section" id="contact" aria-labelledby="contact-title">
         <h2 class="contact-section-head" id="contact-title">문의</h2>
-        <p class="contact-copy">전화, 이메일 또는 맞춤견적 페이지를 통해 문의하실 수 있습니다. 대량 주문이나 규격 상담은 필요한 수량과 용도를 함께 알려주시면 안내가 더 빨라집니다.</p>
+        <p class="contact-copy">전화 또는 이메일로 문의하실 수 있습니다. 대량 주문이나 규격 상담은 필요한 수량과 용도를 함께 알려주시면 안내가 더 빨라집니다.</p>
         <div class="contact-detail-grid">
           <div class="contact-detail-item">
             <div class="contact-detail-label">대표번호</div>
+            <div class="contact-detail-value"><a href="tel:02-2269-4933">02-2269-4933</a></div>
+          </div>
+          <div class="contact-detail-item">
+            <div class="contact-detail-label">보조번호</div>
             <div class="contact-detail-value"><a href="tel:02-2268-9059">02-2268-9059</a></div>
           </div>
           <div class="contact-detail-item">
@@ -123,8 +139,12 @@
             <div class="contact-detail-value"><a href="mailto:sinsin4933@gmail.com">sinsin4933@gmail.com</a></div>
           </div>
           <div class="contact-detail-item">
+            <div class="contact-detail-label">블로그</div>
+            <div class="contact-detail-value"><a href="https://blog.naver.com/stepano6572" target="_blank" rel="noopener noreferrer">https://blog.naver.com/stepano6572</a></div>
+          </div>
+          <div class="contact-detail-item">
             <div class="contact-detail-label">견적 문의</div>
-            <div class="contact-detail-value"><span class="keep-korean">맞춤견적 페이지</span> 또는 <span class="keep-korean">전화·이메일 접수</span></div>
+            <div class="contact-detail-value"><span class="keep-korean">전화 + 이메일 접수</span></div>
           </div>
           <div class="contact-detail-item">
             <div class="contact-detail-label">세금계산서 안내</div>
@@ -140,20 +160,62 @@
   </div>
 </section>
 
+<script>
+  (function() {
+    var copyBtn = document.getElementById('copyAddressBtn');
+    var copyMsg = document.getElementById('copyAddressMsg');
+    var address = '서울 중구 을지로35길 8, 1층(방산시장 내)';
+
+    if (!copyBtn) return;
+
+    function setMessage(text) {
+      if (copyMsg) copyMsg.textContent = text;
+    }
+
+    copyBtn.addEventListener('click', function() {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(address).then(function() {
+          setMessage('주소가 복사되었습니다.');
+        }).catch(function() {
+          setMessage('복사에 실패했습니다. 주소를 직접 복사해 주세요.');
+        });
+        return;
+      }
+
+      var textarea = document.createElement('textarea');
+      textarea.value = address;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'absolute';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      try {
+        document.execCommand('copy');
+        setMessage('주소가 복사되었습니다.');
+      } catch (e) {
+        setMessage('복사에 실패했습니다. 주소를 직접 복사해 주세요.');
+      }
+
+      document.body.removeChild(textarea);
+    });
+  })();
+</script>
+
 
 <footer class="footer">
   <div class="container">
     <div class="footer-links">
       <a href="contact.html">회사소개</a>
       <a href="shipping.html">이용안내</a>
-      <a href="tax.html">개인정보</a>
-      <a href="shipping.html">이용약관</a>
+      <a href="privacy.html">개인정보</a>
+      <a href="terms.html">이용약관</a>
     </div>
     <div class="footer-info">
-      <p><strong>신신지업사</strong></p>
-      <p>주소: 서울 중구 을지로35길 8, 1층 (방산시장 내)<br/>대표번호: <a href="tel:02-2268-9059">02-2268-9059</a> | 이메일: <a href="mailto:sinsin4933@gmail.com">sinsin4933@gmail.com</a></p>
-      <p>상담 시간: 평일 09:00~18:00<br/>배송 방식: 택배 또는 퀵 / 기본 착불</p>
-      <p>견적 문의: <span class="keep-korean">맞춤견적 페이지</span> 또는 <span class="keep-korean">전화·이메일 접수</span><br/>세금계산서 안내: 주문 후 <span class="keep-korean">사업자등록증</span>과 <span class="keep-korean">발행받을 이메일</span>을 보내주시면 확인 후 안내해드립니다.</p>
+      <p><strong>신신지업사</strong> | 대표자: 이재진</p>
+      <p>주소: 서울 중구 을지로35길 8, 1층(방산시장 내)<br/>대표번호: <a href="tel:02-2269-4933">02-2269-4933</a> | 보조번호: <a href="tel:02-2268-9059">02-2268-9059</a> | 이메일: <a href="mailto:sinsin4933@gmail.com">sinsin4933@gmail.com</a></p>
+      <p>영업시간: 평일 08:00~18:00 / 토요일·공휴일 08:00~14:00 / 일요일 휴무<br/>견적문의/접수: 전화 + 이메일<br/>배송방식: 퀵 / 택배 / 방문수령 | 배송비: 기본 착불</p>
+      <p>제작기간: 기성품 1~3일 / 맞춤제작·인쇄 별도 협의<br/>세금계산서: 발행 가능 / 입금 후 발행<br/>필요자료: 사업자등록증 + 이메일<br/>예금주: 신신지업사(이재진)</p>
       <p class="small">© 신신지업사. 문의는 전화 또는 이메일로 부탁드립니다.</p>
     </div>
   </div>
