@@ -72,6 +72,26 @@
 
   const submitButton = document.getElementById('quoteSubmitButton');
   const statusNode = document.getElementById('quoteFormStatus');
+  const sourcePageField = document.getElementById('quoteSourcePage');
+  const quoteFieldOrder = [
+    'item',
+    'size',
+    'strength',
+    'qty',
+    'print_type',
+    'shipping_method',
+    'due_text',
+    'company',
+    'phone',
+    'email',
+    'extra',
+    'source_page',
+    'website'
+  ];
+  const currentPageName = (() => {
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+    return pathParts[pathParts.length - 1] || 'quote.html';
+  })();
 
   const setStatus = (message, type) => {
     if (!statusNode) {
@@ -81,6 +101,28 @@
     statusNode.textContent = message;
     statusNode.style.color = type === 'error' ? '#b42318' : '#123A5A';
   };
+
+  const resetSourcePageValue = () => {
+    if (sourcePageField) {
+      sourcePageField.value = currentPageName;
+    }
+  };
+
+  const parseJsonResponse = async (response) => {
+    const responseText = await response.text();
+
+    if (!responseText) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(responseText);
+    } catch (error) {
+      return null;
+    }
+  };
+
+  resetSourcePageValue();
 
   quoteForm.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -102,9 +144,11 @@
       return;
     }
 
-    const payload = {};
-    formData.forEach((value, key) => {
-      payload[key] = typeof value === 'string' ? value.trim() : value;
+    const params = new URLSearchParams();
+    quoteFieldOrder.forEach((key) => {
+      const value = formData.get(key);
+      const normalizedValue = typeof value === 'string' ? value.trim() : value;
+      params.append(key, normalizedValue == null ? '' : normalizedValue);
     });
 
     if (submitButton) {
@@ -114,27 +158,55 @@
     setStatus('견적 요청을 전송하고 있습니다.', 'success');
 
     try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      });
+      let response;
+
+      try {
+        response = await fetch(endpoint, {
+          method: 'POST',
+          redirect: 'follow',
+          body: params
+        });
+      } catch (error) {
+        error.type = 'network';
+        throw error;
+      }
+
+      const result = await parseJsonResponse(response);
+      const serverMessage = result && typeof result.message === 'string'
+        ? result.message.trim()
+        : '';
 
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
+        const error = new Error(serverMessage || `HTTP ${response.status}`);
+        error.type = 'http';
+        error.userMessage = serverMessage || '서버 응답에 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.';
+        throw error;
+      }
+
+      if (result && result.ok === false) {
+        const error = new Error(serverMessage || '서버 검증에 실패했습니다.');
+        error.type = 'server';
+        error.userMessage = serverMessage || '입력한 내용을 다시 확인해 주세요.';
+        throw error;
       }
 
       quoteForm.reset();
-      const sourcePage = document.getElementById('quoteSourcePage');
-      if (sourcePage) {
-        sourcePage.value = 'quote.html';
-      }
+      resetSourcePageValue();
       setStatus('견적 요청이 접수되었습니다. 확인 후 연락드리겠습니다.', 'success');
     } catch (error) {
-      setStatus('전송 중 문제가 발생했습니다. 전화 02-2269-4933 또는 이메일로 문의해 주세요.', 'error');
+      console.error(error);
+
+      if (error && typeof error.userMessage === 'string' && error.userMessage.trim()) {
+        setStatus(error.userMessage.trim(), 'error');
+      } else if (error && error.type === 'network') {
+        setStatus('네트워크 연결을 확인한 뒤 다시 시도해 주세요.', 'error');
+      } else if (error && error.type === 'http') {
+        setStatus('서버 응답에 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'error');
+      } else if (error && error.type === 'server') {
+        setStatus('입력한 내용을 다시 확인해 주세요.', 'error');
+      } else {
+        setStatus('전송 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'error');
+      }
     } finally {
       if (submitButton) {
         submitButton.disabled = false;
