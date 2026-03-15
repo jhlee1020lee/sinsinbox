@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8"/>
@@ -21,7 +21,7 @@
 
 <div class="shop-utility">
   <div class="container utility-inner">
-    <div class="utility-phone">고객센터 대표번호 <a href="tel:02-2269-4933">02-2269-4933</a> (보조번호 <a href="tel:02-2268-9059">02-2268-9059</a>)</div>
+    <div class="utility-phone">고객센터 대표번호 02-2269-4933 (보조번호 02-2268-9059)</div>
     <div class="utility-links">
       <a href="products.html">상품보기</a>
       <a href="quote.html">견적요청</a>
@@ -63,9 +63,9 @@
   <section class="quick-box">
     <h3>상담센터</h3>
     <p class="quick-strong nowrap">대표번호</p>
-    <a class="quick-strong nowrap" href="tel:02-2269-4933">02-2269-4933</a>
+    <p class="quick-strong nowrap">02-2269-4933</p>
     <p class="nowrap">보조번호</p>
-    <a class="nowrap" href="tel:02-2268-9059">02-2268-9059</a>
+    <p class="nowrap">02-2268-9059</p>
     <p>평일 08:00~18:00</p>
     <p>토요일·공휴일 08:00~14:00</p>
     <p>일요일 휴무</p>
@@ -103,10 +103,10 @@
     <div class="split" style="margin-top:18px;">
       <div class="card">
         <h3>견적요청 폼</h3>
-        <form class="form" id="quoteForm">
+        <form class="form" id="quoteForm" novalidate>
           <div class="field">
             <label>문의 품목</label>
-            <select id="quoteItem" required>
+            <select id="quoteItem" name="item" required>
               <option value="">선택</option>
               <option>택배박스(골판지 박스)</option>
               <option>D형 박스(맞춤견적)</option>
@@ -118,13 +118,13 @@
 
           <div class="field">
             <label>규격/사이즈 (가로×세로×높이 / mm)</label>
-            <input id="quoteSize" placeholder="규격을 입력해 주세요 (내경/외경 포함)" required/>
+            <input id="quoteSize" name="size" placeholder="규격을 입력해 주세요 (내경/외경 포함)" required/>
             <div class="help">박스는 내경/외경 기준이 혼동되기 쉬워서, 기준을 같이 적어두는 것을 추천합니다.</div>
           </div>
 
           <div class="field">
             <label>골/강도(선택)</label>
-            <select id="quoteStrength">
+            <select id="quoteStrength" name="strength">
               <option value="">미정(추천 요청)</option>
               <option>A골(튼튼)</option>
               <option>B골(기본)</option>
@@ -135,12 +135,12 @@
 
           <div class="field">
             <label>수량</label>
-            <input id="quoteQty" placeholder="수량을 입력해 주세요" required/>
+            <input id="quoteQty" name="qty" placeholder="수량을 입력해 주세요" required/>
           </div>
 
           <div class="field">
             <label>인쇄 여부</label>
-            <select id="quotePrint">
+            <select id="quotePrint" name="print_type">
               <option>없음</option>
               <option>1도 인쇄</option>
               <option>컬러 인쇄</option>
@@ -150,7 +150,7 @@
 
           <div class="field">
             <label>배송 방식</label>
-            <select id="quoteShipping">
+            <select id="quoteShipping" name="shipping_method">
               <option value="">선택</option>
               <option>퀵</option>
               <option>택배</option>
@@ -161,7 +161,7 @@
 
           <div class="field">
             <label>희망 납기</label>
-            <input id="quoteDue" placeholder="희망 납기를 입력해 주세요" />
+            <input id="quoteDue" name="due_text" placeholder="희망 납기를 입력해 주세요" />
           </div>
 
           <div class="field">
@@ -173,22 +173,29 @@
 
           <div class="field">
             <label>회사명/담당자</label>
-            <input id="quoteCompany" placeholder="회사명과 담당자명을 입력해 주세요" required/>
+            <input id="quoteCompany" name="company" placeholder="회사명과 담당자명을 입력해 주세요" required/>
           </div>
 
           <div class="field">
             <label>연락처</label>
-            <input id="quotePhone" placeholder="연락처를 입력해 주세요" required/>
+            <input id="quotePhone" name="phone" placeholder="연락처를 입력해 주세요" required/>
           </div>
 
           <div class="field">
             <label>이메일</label>
-            <input id="quoteEmail" type="email" placeholder="이메일 주소를 입력해 주세요" />
+            <input id="quoteEmail" name="email" type="email" placeholder="이메일 주소를 입력해 주세요" />
           </div>
+
+          <div class="field" style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+            <label for="quoteWebsite">Website</label>
+            <input id="quoteWebsite" name="website" type="text" tabindex="-1" autocomplete="off"/>
+          </div>
+
+          <input id="quoteSourcePage" name="source_page" type="hidden" value="quote.html"/>
 
           <div class="field">
             <label>추가 요청사항</label>
-            <textarea id="quoteExtra" placeholder="추가 요청사항을 입력해 주세요"></textarea>
+            <textarea id="quoteExtra" name="extra" placeholder="추가 요청사항을 입력해 주세요"></textarea>
           </div>
 
           <div class="field">
@@ -199,14 +206,16 @@
           </div>
 
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <button class="btn primary" type="submit"><span class="keep">이메일로 견적 문의하기</span></button>
+            <button class="btn primary" type="submit" id="quoteSubmitButton"><span class="keep">견적 요청 보내기</span></button>
             <a class="btn" href="contact.html">직접 문의하기</a>
           </div>
+
+          <div id="quoteFormStatus" class="help" style="margin-top:10px;" role="status" aria-live="polite"></div>
 
           <div class="help" style="margin-top:8px;">메일 앱이 열리지 않으면 아래 이메일 또는 전화로 문의해 주세요.</div>
           <div class="help" style="margin-top:6px;">
             이메일: <a href="mailto:sinsin4933@gmail.com">sinsin4933@gmail.com</a><br/>
-            대표번호: <a href="tel:02-2269-4933">02-2269-4933</a> / 보조번호: <a href="tel:02-2268-9059">02-2268-9059</a>
+            대표번호: 02-2269-4933 / 보조번호: 02-2268-9059
           </div>
         </form>
       </div>
@@ -230,7 +239,7 @@
 </section>
 
 <script>
-  document.getElementById('quoteForm').addEventListener('submit', function(e){
+  if (false) document.getElementById('quoteForm').addEventListener('submit', function(e){
     e.preventDefault();
     var val = function(id){
       var el = document.getElementById(id);
@@ -256,14 +265,14 @@
       '추가 요청사항: ' + safe(val('quoteExtra'))
     ].join('\n');
 
-    window.location.href = 'mailto:sinsin4933@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    return;
   });
 </script>
 
 
 <div class="mobile-sticky-cta" aria-label="빠른 문의">
-  <a class="btn primary" href="tel:02-2269-4933">전화문의</a>
-  <a class="btn" href="quote.html">견적요청</a>
+  <a class="btn primary" href="quote.html">견적요청</a>
+  <a class="btn" href="contact.html">문의/오시는길</a>
 </div>
 
 <footer class="footer">
@@ -276,13 +285,17 @@
     </div>
     <div class="footer-info">
       <p><strong>신신지업사</strong> | 대표자: 이재진</p>
-      <p>주소: 서울 중구 을지로35길 8, 1층(방산시장 내)<br/>대표번호: <a href="tel:02-2269-4933">02-2269-4933</a> | 보조번호: <a href="tel:02-2268-9059">02-2268-9059</a> | 이메일: <a href="mailto:sinsin4933@gmail.com">sinsin4933@gmail.com</a></p>
+      <p>주소: 서울 중구 을지로35길 8, 1층(방산시장 내)<br/>대표번호: 02-2269-4933 | 보조번호: 02-2268-9059 | 이메일: <a href="mailto:sinsin4933@gmail.com">sinsin4933@gmail.com</a></p>
       <p>영업시간: 평일 08:00~18:00 / 토요일·공휴일 08:00~14:00 / 일요일 휴무<br/>견적문의/접수: 전화 + 이메일<br/>배송방식: 퀵 / 택배 / 방문수령 | 배송비: 기본 착불</p>
       <p>제작기간: 기성품 1~3일 / 맞춤제작·인쇄 별도 협의<br/>세금계산서: 발행 가능 / 입금 후 발행<br/>필요자료: 사업자등록증 + 이메일<br/>예금주: 신신지업사(이재진)</p>
       <p class="small">© 신신지업사. 문의는 전화 또는 이메일로 부탁드립니다.</p>
     </div>
   </div>
 </footer>
+<script>
+  window.APP_CONFIG = window.APP_CONFIG || {};
+</script>
+<script src="assets/config.js"></script>
 <script src="assets/site.js"></script>
 </body>
 </html>

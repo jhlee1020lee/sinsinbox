@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8"/>
@@ -21,7 +21,7 @@
 
 <div class="shop-utility">
   <div class="container utility-inner">
-    <div class="utility-phone">고객센터 대표번호 <a href="tel:02-2269-4933">02-2269-4933</a> (보조번호 <a href="tel:02-2268-9059">02-2268-9059</a>)</div>
+    <div class="utility-phone">고객센터 대표번호 02-2269-4933 (보조번호 02-2268-9059)</div>
     <div class="utility-links">
       <a href="products.html">상품보기</a>
       <a href="quote.html">견적요청</a>
@@ -63,9 +63,9 @@
   <section class="quick-box">
     <h3>상담센터</h3>
     <p class="quick-strong nowrap">대표번호</p>
-    <a class="quick-strong nowrap" href="tel:02-2269-4933">02-2269-4933</a>
+    <p class="quick-strong nowrap">02-2269-4933</p>
     <p class="nowrap">보조번호</p>
-    <a class="nowrap" href="tel:02-2268-9059">02-2268-9059</a>
+    <p class="nowrap">02-2268-9059</p>
     <p>평일 08:00~18:00</p>
     <p>토요일·공휴일 08:00~14:00</p>
     <p>일요일 휴무</p>
@@ -114,26 +114,32 @@
     </section>
 
     <div class="split" style="margin-top:18px;">
-      <div class="card">
-        <div class="thumb" style="height:220px;">
-<svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
-  <path d="M10 18.5 32 9l22 9.5-22 9.5L10 18.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M10 18.5V45.5L32 55l22-9.5V18.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M32 28V55" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-</svg>
-</div>
-        <div style="margin-top:12px; display:grid; gap:8px;">
-          <div style="font-weight:800; font-size:18px;">핵심 사양</div>
-          <table class="table" aria-label="상품 사양">
-            <tr><th>규격</th><td>1100×800</td></tr>
-            <tr><th>재질</th><td>편면 (SK/E골,白E골)</td></tr>
-            <tr><th>골</th><td>품목별 상이 (상담 후 확정)</td></tr>
-            <tr><th>두께</th><td>-</td></tr>
-            <tr><th>단가(안내)</th><td>1,000원 <span style="color:var(--muted); font-size:13px;">(수량/사양에 따라 변동 가능)</span></td></tr>
-            <tr><th>수량(안내)</th><td>10개 부터</td></tr>
-            <tr><th>리드타임</th><td>수량/사양에 따라 변동 (상담 후 안내)</td></tr>
-            <tr><th>배송</th><td>택배/퀵 협의, 기본 착불</td></tr>
-          </table>
+      <div class="panel product-summary-card">
+        <div class="product-summary-top">
+          <div class="badges"><span class="badge strong">골판지 (편면)</span></div>
+          <div class="product-summary-title">골판지 (편면) ITEM-27</div>
+        </div>
+        <div class="product-summary-grid">
+          <div class="product-summary-item product-summary-item-wide">
+            <div class="product-summary-label">규격</div>
+            <div class="product-summary-value">1100×800</div>
+          </div>
+          <div class="product-summary-item product-summary-item-wide">
+            <div class="product-summary-label">재질 / 골 / 두께</div>
+            <div class="product-summary-value">재질 편면 (SK/E골,白E골) / 골 품목별 상이 (상담 후 확정) / 두께 -</div>
+          </div>
+          <div class="product-summary-item">
+            <div class="product-summary-label">단가</div>
+            <div class="product-summary-value product-summary-price">1,000원 (수량/사양에 따라 변동 가능)</div>
+          </div>
+          <div class="product-summary-item">
+            <div class="product-summary-label">최소수량</div>
+            <div class="product-summary-value">10개 부터</div>
+          </div>
+          <div class="product-summary-item product-summary-item-wide">
+            <div class="product-summary-label">리드타임</div>
+            <div class="product-summary-value">수량/사양에 따라 변동 (상담 후 안내)</div>
+          </div>
         </div>
       </div>
 
@@ -141,7 +147,7 @@
         <div class="panel product-order-panel">
           <h3>주문/견적</h3>
 
-          <div class="form" style="margin-top:12px;">
+          <div class="form" style="margin-top:12px;" data-quote-calc data-unit-price="1000">
             <div class="field">
               <label for="qty">수량</label>
               <select id="qty">
@@ -158,9 +164,14 @@
               <input value="1,000원" readonly/>
             </div>
 
+            <div class="field">
+              <label>예상 상품금액</label>
+              <input data-quote-total value="" readonly/>
+            </div>
+
             <div style="display:flex; gap:10px; flex-wrap:wrap;">
               <a class="btn primary" href="quote.html">이 사양으로 견적요청</a>
-              <a class="btn" href="contact.html">전화 문의</a>
+              <a class="btn" href="contact.html">문의/오시는길</a>
             </div>
           </div>
         </div>
@@ -170,7 +181,7 @@
           <h3>빠른 상담</h3>
           <div style="display:grid; gap:8px;">
             <a class="btn primary" href="quote.html">견적요청</a>
-            <a class="btn" href="tel:02-2269-4933">전화문의</a>
+            <a class="btn" href="contact.html">문의/오시는길</a>
           </div>
         </div>
 
@@ -229,13 +240,13 @@
       <p>대량 발주/맞춤 제작은 견적요청 또는 전화 상담으로 빠르게 안내해 드립니다.</p>
       <div style="display:flex; gap:10px; flex-wrap:wrap;">
         <a class="btn primary" href="quote.html">견적요청</a>
-        <a class="btn" href="tel:02-2269-4933">전화문의</a>
+        <a class="btn" href="contact.html">문의/오시는길</a>
       </div>
     </section>
 
     <div class="mobile-sticky-cta" aria-label="빠른 문의">
-  <a class="btn primary" href="tel:02-2269-4933">전화문의</a>
-  <a class="btn" href="quote.html">견적요청</a>
+  <a class="btn primary" href="quote.html">견적요청</a>
+  <a class="btn" href="contact.html">문의/오시는길</a>
 </div>
 
 
@@ -253,7 +264,7 @@
     </div>
     <div class="footer-info">
       <p><strong>신신지업사</strong> | 대표자: 이재진</p>
-      <p>주소: 서울 중구 을지로35길 8, 1층(방산시장 내)<br/>대표번호: <a href="tel:02-2269-4933">02-2269-4933</a> | 보조번호: <a href="tel:02-2268-9059">02-2268-9059</a> | 이메일: <a href="mailto:sinsin4933@gmail.com">sinsin4933@gmail.com</a></p>
+      <p>주소: 서울 중구 을지로35길 8, 1층(방산시장 내)<br/>대표번호: 02-2269-4933 | 보조번호: 02-2268-9059 | 이메일: <a href="mailto:sinsin4933@gmail.com">sinsin4933@gmail.com</a></p>
       <p>영업시간: 평일 08:00~18:00 / 토요일·공휴일 08:00~14:00 / 일요일 휴무<br/>견적문의/접수: 전화 + 이메일<br/>배송방식: 퀵 / 택배 / 방문수령 | 배송비: 기본 착불</p>
       <p>제작기간: 기성품 1~3일 / 맞춤제작·인쇄 별도 협의<br/>세금계산서: 발행 가능 / 입금 후 발행<br/>필요자료: 사업자등록증 + 이메일<br/>예금주: 신신지업사(이재진)</p>
       <p class="small">© 신신지업사. 문의는 전화 또는 이메일로 부탁드립니다.</p>
