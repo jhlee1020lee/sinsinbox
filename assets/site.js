@@ -1,4 +1,8 @@
 (() => {
+  if (document.querySelector('.mobile-sticky-cta')) {
+    document.body.classList.add('has-mobile-cta');
+  }
+
   const toggle = document.querySelector('[data-mobile-toggle]');
   const mobileNav = document.querySelector('[data-mobile-nav]');
 
