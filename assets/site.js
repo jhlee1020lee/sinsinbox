@@ -134,13 +134,13 @@
 
     const endpoint = window.APP_CONFIG && window.APP_CONFIG.QUOTE_ENDPOINT;
     if (!endpoint) {
-      setStatus('전송 설정을 확인할 수 없습니다. 전화나 이메일로 문의해 주세요.', 'error');
+      setStatus('시스템 오류로 인해 견적 요청을 전송할 수 없습니다. 잠시 후 다시 시도해 주세요.', 'error');
       return;
     }
 
     const formData = new FormData(quoteForm);
     if (String(formData.get('website') || '').trim() !== '') {
-      setStatus('전송을 진행할 수 없습니다.', 'error');
+      setStatus('전송에 실패했습니다.', 'error');
       return;
     }
 
