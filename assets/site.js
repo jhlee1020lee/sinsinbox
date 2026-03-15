@@ -1,154 +1,144 @@
 (() => {
-  if (document.querySelector('.mobile-sticky-cta')) {
-    document.body.classList.add('has-mobile-cta');
-  }
-
-  const toggle = document.querySelector('[data-mobile-toggle]');
+  const body = document.body;
+  const toggleButton = document.querySelector('[data-mobile-toggle]');
   const mobileNav = document.querySelector('[data-mobile-nav]');
+  const stickyCta = document.querySelector('.mobile-sticky-cta');
 
-  if (toggle && mobileNav) {
-    toggle.addEventListener('click', () => {
-      const expanded = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!expanded));
-      mobileNav.classList.toggle('is-open', !expanded);
+  if (toggleButton && mobileNav) {
+    toggleButton.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('is-open');
+      toggleButton.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    mobileNav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('is-open');
+        toggleButton.setAttribute('aria-expanded', 'false');
+      });
     });
   }
 
-  const tabLinks = [...document.querySelectorAll('.product-tabs a[href^="#"]')];
-  if (tabLinks.length) {
-    const setActive = () => {
-      const current = window.location.hash || '#detail-info';
-      tabLinks.forEach((link) => {
-        link.classList.toggle('is-active', link.getAttribute('href') === current);
+  if (stickyCta) {
+    body.classList.add('has-mobile-cta');
+  }
+
+  const productTabs = document.querySelectorAll('.product-tabs a');
+  if (productTabs.length) {
+    const syncActiveTab = () => {
+      const currentHash = window.location.hash || productTabs[0].getAttribute('href');
+      productTabs.forEach((tab) => {
+        tab.classList.toggle('is-active', tab.getAttribute('href') === currentHash);
       });
     };
 
-    tabLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        setTimeout(setActive, 0);
+    productTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        window.setTimeout(syncActiveTab, 0);
       });
     });
 
-    window.addEventListener('hashchange', setActive);
-    setActive();
+    window.addEventListener('hashchange', syncActiveTab);
+    syncActiveTab();
   }
 
-  const quoteCalculators = [...document.querySelectorAll('[data-quote-calc]')];
-  if (quoteCalculators.length) {
-    const won = new Intl.NumberFormat('ko-KR');
+  document.querySelectorAll('[data-quote-calc]').forEach((wrapper) => {
+    const qtyField = wrapper.querySelector('[data-quote-qty]');
+    const totalField = wrapper.querySelector('[data-quote-total]');
+    const unitPrice = Number(wrapper.getAttribute('data-unit-price'));
 
-    quoteCalculators.forEach((calculator) => {
-      const unitPrice = Number(calculator.dataset.unitPrice || 0);
-      const qtyField = calculator.querySelector('select[id="qty"], select[name="qty"], [data-quote-qty]');
-      const totalField = calculator.querySelector('[data-quote-total]');
+    if (!qtyField || !totalField || !Number.isFinite(unitPrice)) {
+      return;
+    }
 
-      if (!unitPrice || !qtyField || !totalField) {
+    const formatter = new Intl.NumberFormat('ko-KR');
+    const render = () => {
+      const quantity = Number(qtyField.value || 0);
+      if (!Number.isFinite(quantity) || quantity <= 0) {
+        totalField.value = '';
         return;
       }
 
-      const renderTotal = () => {
-        const quantity = Number(qtyField.value || 0);
-        totalField.value = `${won.format(unitPrice * quantity)}원`;
-      };
+      totalField.value = `예상 금액 ${formatter.format(unitPrice * quantity)}원`;
+    };
 
-      qtyField.addEventListener('change', renderTotal);
-      qtyField.addEventListener('input', renderTotal);
-      renderTotal();
-    });
-  }
+    qtyField.addEventListener('change', render);
+    render();
+  });
 
   const quoteForm = document.getElementById('quoteForm');
-  if (quoteForm) {
-    const status = document.getElementById('quoteFormStatus');
-    const submitButton = document.getElementById('quoteSubmitButton');
-    const submitLabel = submitButton ? submitButton.innerHTML : '';
-    const config = window.APP_CONFIG || {};
-
-    const setStatus = (message, type) => {
-      if (!status) {
-        return;
-      }
-
-      status.textContent = message;
-      status.style.color = type === 'error' ? 'var(--danger, #b42318)' : 'var(--text)';
-    };
-
-    const setSubmitting = (isSubmitting) => {
-      if (!submitButton) {
-        return;
-      }
-
-      submitButton.disabled = isSubmitting;
-      submitButton.setAttribute('aria-disabled', String(isSubmitting));
-      submitButton.innerHTML = isSubmitting ? '전송 중...' : submitLabel;
-    };
-
-    quoteForm.addEventListener('submit', async (event) => {
-      event.preventDefault();
-
-      if (quoteForm.dataset.submitting === 'true') {
-        return;
-      }
-
-      if (!quoteForm.reportValidity()) {
-        return;
-      }
-
-      const endpoint = String(config.QUOTE_ENDPOINT || '').trim();
-      if (!endpoint) {
-        setStatus('견적 접수 설정이 아직 연결되지 않았습니다. 관리자 설정이 필요합니다.', 'error');
-        return;
-      }
-
-      const formData = new FormData(quoteForm);
-      formData.set('source_page', window.location.pathname.split('/').pop() || 'quote.html');
-
-      if (String(formData.get('website') || '').trim()) {
-        setStatus('요청을 처리할 수 없습니다. 다시 시도해 주세요.', 'error');
-        return;
-      }
-
-      quoteForm.dataset.submitting = 'true';
-      setSubmitting(true);
-      setStatus('견적 요청을 전송하고 있습니다.', 'info');
-
-      try {
-        const response = await fetch(endpoint, {
-          method: 'POST',
-          body: new URLSearchParams(formData),
-        });
-
-        let result = null;
-        try {
-          result = await response.json();
-        } catch (error) {
-          result = null;
-        }
-
-        if (!response.ok) {
-          throw new Error('network-error');
-        }
-
-        if (result && result.ok === false) {
-          throw new Error(result.message || '견적 요청을 전송하지 못했습니다.');
-        }
-
-        const company = String(formData.get('company') || '-');
-        const phone = String(formData.get('phone') || '-');
-        const item = String(formData.get('item') || '-');
-
-        quoteForm.reset();
-        const sourcePageField = document.getElementById('quoteSourcePage');
-        if (sourcePageField) {
-          sourcePageField.value = window.location.pathname.split('/').pop() || 'quote.html';
-        }
-        setStatus(`접수 완료: ${company} / ${phone} / ${item}`, 'success');
-      } catch (error) {
-        setStatus(error instanceof Error && error.message ? error.message : '견적 요청을 전송하지 못했습니다. 잠시 후 다시 시도해 주세요.', 'error');
-      } finally {
-        delete quoteForm.dataset.submitting;
-        setSubmitting(false);
-      }
-    });
+  if (!quoteForm) {
+    return;
   }
+
+  const submitButton = document.getElementById('quoteSubmitButton');
+  const statusNode = document.getElementById('quoteFormStatus');
+
+  const setStatus = (message, type) => {
+    if (!statusNode) {
+      return;
+    }
+
+    statusNode.textContent = message;
+    statusNode.style.color = type === 'error' ? '#b42318' : '#123A5A';
+  };
+
+  quoteForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (!quoteForm.reportValidity()) {
+      setStatus('필수 항목을 먼저 확인해 주세요.', 'error');
+      return;
+    }
+
+    const endpoint = window.APP_CONFIG && window.APP_CONFIG.QUOTE_ENDPOINT;
+    if (!endpoint) {
+      setStatus('전송 설정을 확인할 수 없습니다. 전화나 이메일로 문의해 주세요.', 'error');
+      return;
+    }
+
+    const formData = new FormData(quoteForm);
+    if (String(formData.get('website') || '').trim() !== '') {
+      setStatus('전송을 진행할 수 없습니다.', 'error');
+      return;
+    }
+
+    const payload = {};
+    formData.forEach((value, key) => {
+      payload[key] = typeof value === 'string' ? value.trim() : value;
+    });
+
+    if (submitButton) {
+      submitButton.disabled = true;
+    }
+
+    setStatus('견적 요청을 전송하고 있습니다.', 'success');
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      quoteForm.reset();
+      const sourcePage = document.getElementById('quoteSourcePage');
+      if (sourcePage) {
+        sourcePage.value = 'quote.html';
+      }
+      setStatus('견적 요청이 접수되었습니다. 확인 후 연락드리겠습니다.', 'success');
+    } catch (error) {
+      setStatus('전송 중 문제가 발생했습니다. 전화 02-2269-4933 또는 이메일로 문의해 주세요.', 'error');
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+      }
+    }
+  });
 })();
