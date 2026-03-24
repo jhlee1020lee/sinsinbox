@@ -400,7 +400,7 @@
 
     const endpoint = window.APP_CONFIG && window.APP_CONFIG.QUOTE_ENDPOINT;
     if (!endpoint) {
-      setStatus('시스템 오류로 인해 견적 요청을 전송할 수 없습니다. 잠시 후 다시 시도해 주세요.', 'error');
+      setStatus('시스템 오류로 인해 견적 요청을 전송할 수 없습니다. 전화 또는 이메일 문의를 이용해 주세요.', 'error');
       return;
     }
 
@@ -465,13 +465,13 @@
       if (error && typeof error.userMessage === 'string' && error.userMessage.trim()) {
         setStatus(error.userMessage.trim(), 'error');
       } else if (error && error.type === 'network') {
-        setStatus('네트워크 연결을 확인한 뒤 다시 시도해 주세요.', 'error');
+        setStatus('네트워크 연결을 확인한 뒤 다시 시도해 주세요. 전송이 되지 않으면 전화 또는 이메일 문의를 이용해 주세요.', 'error');
       } else if (error && error.type === 'http') {
-        setStatus('서버 응답에 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'error');
+        setStatus('서버 응답에 문제가 발생했습니다. 잠시 후 다시 시도해 주세요. 전송이 되지 않으면 전화 또는 이메일 문의를 이용해 주세요.', 'error');
       } else if (error && error.type === 'server') {
-        setStatus('입력한 내용을 다시 확인해 주세요.', 'error');
+        setStatus('입력한 내용을 다시 확인해 주세요. 계속 문제가 있으면 전화 또는 이메일 문의를 이용해 주세요.', 'error');
       } else {
-        setStatus('전송 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'error');
+        setStatus('전송 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요. 전송이 되지 않으면 전화 또는 이메일 문의를 이용해 주세요.', 'error');
       }
     } finally {
       if (submitButton) {

@@ -69,6 +69,7 @@
   <div class="container quote-grid">
     <div class="form-card">
       <h2>견적 요청서</h2>
+      <p class="form-contact-note">폼 전송이 원활하지 않으면 이메일 또는 전화 문의로 바로 접수하실 수 있습니다.</p>
       <form id="quoteForm" novalidate>
         <div class="form-group">
           <h3 class="form-group-title">발주 정보</h3>
@@ -95,8 +96,10 @@
         </div>
         <div class="form-actions">
           <button class="btn primary" type="submit" id="quoteSubmitButton">견적 요청 보내기</button>
+          <a class="btn utility" href="mailto:sinsin4933@gmail.com?subject=%EC%8B%A0%EC%8B%A0%EC%A7%80%EC%97%85%EC%82%AC%20%EA%B2%AC%EC%A0%81%20%EB%AC%B8%EC%9D%98">이메일 문의</a>
           <p class="form-contact-note"><span class="form-contact-label">전화문의:</span> <span class="phone-pair"><a href="tel:02-2269-4933">02-2269-4933</a><a href="tel:02-2268-9059">02-2268-9059</a></span></p>
         </div>
+        <noscript><p class="form-contact-note">브라우저 설정상 폼 전송이 되지 않을 수 있습니다. 전화 또는 이메일 문의를 이용해 주세요.</p></noscript>
         <div id="quoteFormStatus" class="help" role="status" aria-live="polite"></div>
       </form>
     </div>

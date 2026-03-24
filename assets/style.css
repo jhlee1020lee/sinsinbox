@@ -208,6 +208,7 @@ button, input, textarea, select { font: inherit; }
 .products-page .product-actions { grid-area: actions; min-width: max-content; justify-self: end; justify-content: flex-end; gap: 8px; flex-wrap: nowrap; flex-shrink: 0; }
 .products-page .product-actions .btn { min-height: 40px; padding: 0 13px; font-size: 14px; }
 .d-custom-card { display: grid; gap: 18px; }
+.d-custom-photo { margin: 0; width: min(100%, 420px); justify-self: start; aspect-ratio: 4 / 3; }
 
 .quote-grid { align-items: start; }
 .form-card h2, .quote-card h2, .detail-section h2 { font-size: 28px; }
@@ -264,6 +265,8 @@ textarea { min-height: 132px; resize: vertical; }
 .product-detail-page .product-hero-grid { grid-template-columns: 1fr; }
 .product-proof-card, .product-summary-card { height: 100%; }
 .product-detail-page .product-proof-card { display: none; }
+.product-detail-page .product-hero-grid.has-proof-image { grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); }
+.product-detail-page .product-proof-card.has-proof-image { display: grid; gap: 12px; align-content: start; }
 .product-proof-card.text-only { align-content: start; background: linear-gradient(180deg, #ffffff 0%, #f8faf9 100%); }
 .product-summary-card {
   display: grid;
