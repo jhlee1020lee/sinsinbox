@@ -5,6 +5,109 @@
   const stickyCta = document.querySelector('.mobile-sticky-cta');
   const normalizeText = (value) => (value || '').replace(/\s+/g, ' ').trim();
   const readText = (node) => normalizeText(node && node.textContent);
+  const appConfig = window.APP_CONFIG || {};
+  const analyticsConfig = appConfig.ANALYTICS || {};
+  const gaMeasurementId = normalizeText(analyticsConfig.GA4_MEASUREMENT_ID);
+  const clarityProjectId = normalizeText(analyticsConfig.CLARITY_PROJECT_ID);
+  const appendExternalScript = (src) => {
+    if (!src || document.querySelector(`script[src="${src}"]`)) {
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = src;
+    document.head.appendChild(script);
+  };
+  const sanitizeAnalyticsParams = (params) => {
+    return Object.entries(params).reduce((accumulator, [key, value]) => {
+      if (value == null) {
+        return accumulator;
+      }
+
+      if (typeof value === 'string') {
+        const normalizedValue = normalizeText(value);
+        if (!normalizedValue) {
+          return accumulator;
+        }
+
+        accumulator[key] = normalizedValue;
+        return accumulator;
+      }
+
+      if (typeof value === 'number' && Number.isFinite(value)) {
+        accumulator[key] = value;
+        return accumulator;
+      }
+
+      if (typeof value === 'boolean') {
+        accumulator[key] = value ? 'true' : 'false';
+      }
+
+      return accumulator;
+    }, {});
+  };
+  const initializeAnalytics = () => {
+    if (gaMeasurementId && typeof window.gtag !== 'function') {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function gtag() {
+        window.dataLayer.push(arguments);
+      };
+      window.gtag('js', new Date());
+      window.gtag('config', gaMeasurementId);
+      appendExternalScript(`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaMeasurementId)}`);
+    }
+
+    if (clarityProjectId && typeof window.clarity !== 'function') {
+      (function setupClarity(c, l, a, r, i, t, y) {
+        c[a] = c[a] || function clarityProxy() {
+          (c[a].q = c[a].q || []).push(arguments);
+        };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = `https://www.clarity.ms/tag/${i}`;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      }(window, document, 'clarity', 'script', clarityProjectId));
+    }
+  };
+  const trackEvent = (eventName, params = {}) => {
+    if (!gaMeasurementId || typeof window.gtag !== 'function') {
+      return;
+    }
+
+    window.gtag('event', eventName, sanitizeAnalyticsParams({
+      page_path: window.location.pathname,
+      page_title: document.title,
+      ...params
+    }));
+  };
+  const parseLinkTarget = (href) => {
+    try {
+      const url = new URL(href, window.location.href);
+      return {
+        fileName: url.pathname.split('/').filter(Boolean).pop() || '',
+        path: `${url.pathname}${url.search}`
+      };
+    } catch (error) {
+      return {
+        fileName: '',
+        path: href || ''
+      };
+    }
+  };
+  const readSectionTitle = (node) => {
+    if (!node) {
+      return '';
+    }
+
+    const section = node.closest('section');
+    if (!section) {
+      return '';
+    }
+
+    return readText(section.querySelector('.section-title, .page-title, h2, h3'));
+  };
   const findLabeledValue = (root, labels) => {
     if (!root) {
       return '';
@@ -184,6 +287,30 @@
 
     return url.toString();
   };
+  const buildLinkTrackingPayload = (link) => {
+    const href = link.getAttribute('href') || '';
+    const target = parseLinkTarget(href);
+    const payload = {
+      link_text: readText(link),
+      link_target: target.path,
+      section_title: readSectionTitle(link)
+    };
+    const cardData = collectCardQuoteData(link.closest('.feature-card, .product-list-item'));
+    const productData = collectProductQuoteData();
+    const trackingData = cardData || (link.closest('.page-hero, .mobile-sticky-cta') ? productData : null);
+
+    if (trackingData) {
+      payload.item_category = trackingData.itemCategory;
+      payload.item_name = trackingData.itemName;
+      payload.item_size = trackingData.size;
+      payload.item_strength = trackingData.strength;
+      payload.item_qty = trackingData.qty;
+    }
+
+    return sanitizeAnalyticsParams(payload);
+  };
+
+  initializeAnalytics();
 
   if (toggleButton && mobileNav) {
     toggleButton.addEventListener('click', () => {
@@ -250,6 +377,41 @@
 
     updateProductQuoteLinks();
   }
+
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[href]');
+    if (!link) {
+      return;
+    }
+
+    const href = link.getAttribute('href') || '';
+    const target = parseLinkTarget(href);
+
+    if (href.startsWith('tel:')) {
+      trackEvent('phone_click', {
+        link_text: readText(link),
+        section_title: readSectionTitle(link)
+      });
+      return;
+    }
+
+    if (href.startsWith('mailto:')) {
+      trackEvent('email_click', {
+        link_text: readText(link),
+        section_title: readSectionTitle(link)
+      });
+      return;
+    }
+
+    if (target.fileName === 'quote.html') {
+      trackEvent('quote_request_click', buildLinkTrackingPayload(link));
+      return;
+    }
+
+    if (/^product-.*\.html$/i.test(target.fileName)) {
+      trackEvent('product_detail_click', buildLinkTrackingPayload(link));
+    }
+  });
 
   document.querySelectorAll('.feature-card a[href="quote.html"], .product-list-item a[href="quote.html"]').forEach((link) => {
     const card = link.closest('.feature-card, .product-list-item');
@@ -410,6 +572,15 @@
       return;
     }
 
+    const quoteEventParams = sanitizeAnalyticsParams({
+      item_category: formData.get('item'),
+      strength_option: formData.get('strength'),
+      print_type: formData.get('print_type'),
+      shipping_method: formData.get('shipping_method'),
+      source_page: formData.get('source_page'),
+      has_email: Boolean(normalizeText(formData.get('email')))
+    });
+
     const params = new URLSearchParams();
     quoteFieldOrder.forEach((key) => {
       const value = formData.get(key);
@@ -458,6 +629,7 @@
 
       quoteForm.reset();
       resetSourcePageValue();
+      trackEvent('quote_form_submit_success', quoteEventParams);
       setStatus('견적 요청이 접수되었습니다. 확인 후 연락드리겠습니다.', 'success');
     } catch (error) {
       console.error(error);

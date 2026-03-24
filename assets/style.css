@@ -182,6 +182,8 @@ button, input, textarea, select { font: inherit; }
 }
 .products-page .product-title-wrap { grid-area: title; gap: 6px; align-content: center; }
 .products-page .product-spec { grid-area: spec; min-width: 0; font-size: 14px; line-height: 1.45; }
+.products-section-photo { margin: 0 0 18px; width: min(100%, 420px); aspect-ratio: 4 / 3; }
+.products-section-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .products-page .product-meta-grid {
   grid-area: meta;
   display: inline-flex;
@@ -267,6 +269,8 @@ textarea { min-height: 132px; resize: vertical; }
 .product-detail-page .product-proof-card { display: none; }
 .product-detail-page .product-hero-grid.has-proof-image { grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); }
 .product-detail-page .product-proof-card.has-proof-image { display: grid; gap: 12px; align-content: start; }
+.product-detail-page .product-proof-card.has-proof-image .product-proof-media { aspect-ratio: 4 / 3; }
+.product-detail-page .product-proof-card.has-proof-image .product-proof-media img { display: block; }
 .product-proof-card.text-only { align-content: start; background: linear-gradient(180deg, #ffffff 0%, #f8faf9 100%); }
 .product-summary-card {
   display: grid;
