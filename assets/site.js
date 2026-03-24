@@ -3,6 +3,187 @@
   const toggleButton = document.querySelector('[data-mobile-toggle]');
   const mobileNav = document.querySelector('[data-mobile-nav]');
   const stickyCta = document.querySelector('.mobile-sticky-cta');
+  const normalizeText = (value) => (value || '').replace(/\s+/g, ' ').trim();
+  const readText = (node) => normalizeText(node && node.textContent);
+  const findLabeledValue = (root, labels) => {
+    if (!root) {
+      return '';
+    }
+
+    const normalizedLabels = labels.map((label) => normalizeText(label));
+    const entries = root.querySelectorAll('.summary-item, .card');
+
+    for (const entry of entries) {
+      const labelNode = entry.querySelector('.summary-label');
+      const valueNode = entry.querySelector('.summary-value');
+      const labelText = readText(labelNode);
+
+      if (!labelText || !valueNode) {
+        continue;
+      }
+
+      if (normalizedLabels.includes(labelText)) {
+        return readText(valueNode);
+      }
+    }
+
+    return '';
+  };
+  const mapItemCategory = (categoryText, itemName) => {
+    const source = `${normalizeText(categoryText)} ${normalizeText(itemName)}`;
+
+    if (source.includes('택배박스') || source.includes('골판지 박스')) {
+      return '택배박스 / 골판지 박스';
+    }
+
+    if (source.includes('D형박스')) {
+      return 'D형박스';
+    }
+
+    if (source.includes('골판지')) {
+      return '골판지(양면 / 편면)';
+    }
+
+    return '기타 포장자재';
+  };
+  const mapStrengthOption = (strengthText) => {
+    const normalized = normalizeText(strengthText).toUpperCase();
+
+    if (!normalized) {
+      return '';
+    }
+
+    if (normalized.includes('DW') || normalized.includes('D/W')) {
+      return 'DW';
+    }
+
+    if (normalized.includes('A골')) {
+      return 'A골';
+    }
+
+    if (normalized.includes('B골')) {
+      return 'B골';
+    }
+
+    if (normalized.includes('E골')) {
+      return 'E골';
+    }
+
+    return '';
+  };
+  const setSelectValue = (select, value) => {
+    if (!select || !value) {
+      return false;
+    }
+
+    const targetValue = normalizeText(value);
+    const matchedOption = Array.from(select.options).find((option) => {
+      return normalizeText(option.value) === targetValue || normalizeText(option.textContent) === targetValue;
+    });
+
+    if (!matchedOption) {
+      return false;
+    }
+
+    select.value = matchedOption.value;
+    return true;
+  };
+  const appendLines = (field, lines) => {
+    if (!field || !lines.length) {
+      return;
+    }
+
+    const currentValue = normalizeText(field.value);
+    const nextLines = lines.filter((line) => line && !currentValue.includes(line));
+
+    if (!nextLines.length) {
+      return;
+    }
+
+    field.value = currentValue ? `${field.value.trim()}\n${nextLines.join('\n')}` : nextLines.join('\n');
+  };
+  const collectProductQuoteData = () => {
+    if (!body.classList.contains('product-detail-page')) {
+      return null;
+    }
+
+    const pageHero = document.querySelector('.page-hero');
+    if (!pageHero) {
+      return null;
+    }
+
+    const itemName = findLabeledValue(pageHero, ['상품명']) || readText(pageHero.querySelector('.page-title'));
+    const categoryText = readText(pageHero.querySelector('.badges .badge.strong'));
+    const size = findLabeledValue(pageHero, ['규격']);
+    const strength = findLabeledValue(pageHero, ['재질 · 골 · 두께']);
+    const qtyField = pageHero.querySelector('[data-quote-qty]');
+    const qty = qtyField ? normalizeText(qtyField.value) : '';
+
+    return {
+      itemCategory: mapItemCategory(categoryText, itemName),
+      itemName,
+      size,
+      strength,
+      qty
+    };
+  };
+  const collectCardQuoteData = (card) => {
+    if (!card) {
+      return null;
+    }
+
+    const categoryText = readText(card.querySelector('.badges .badge.strong'));
+    let itemName = '';
+    let size = '';
+
+    if (card.classList.contains('feature-card')) {
+      itemName = readText(card.querySelector('h3'));
+      const specValue = card.querySelector('.feature-meta .meta-value');
+      size = readText(specValue).split(' / ')[0];
+    } else if (card.classList.contains('product-list-item')) {
+      itemName = readText(card.querySelector('.product-title'));
+      size = readText(card.querySelector('.product-spec')).split(' / ')[0];
+    }
+
+    if (!itemName && !categoryText && !size) {
+      return null;
+    }
+
+    return {
+      itemCategory: mapItemCategory(categoryText, itemName),
+      itemName,
+      size
+    };
+  };
+  const buildQuoteUrl = (baseHref, productData) => {
+    const url = new URL(baseHref, window.location.href);
+
+    if (!productData) {
+      return url.toString();
+    }
+
+    if (productData.itemCategory) {
+      url.searchParams.set('item_category', productData.itemCategory);
+    }
+
+    if (productData.itemName) {
+      url.searchParams.set('item_name', productData.itemName);
+    }
+
+    if (productData.size) {
+      url.searchParams.set('size', productData.size);
+    }
+
+    if (productData.strength) {
+      url.searchParams.set('strength', productData.strength);
+    }
+
+    if (productData.qty) {
+      url.searchParams.set('qty', productData.qty);
+    }
+
+    return url.toString();
+  };
 
   if (toggleButton && mobileNav) {
     toggleButton.addEventListener('click', () => {
@@ -40,6 +221,46 @@
     window.addEventListener('hashchange', syncActiveTab);
     syncActiveTab();
   }
+
+  const productQuoteLinks = Array.from(document.querySelectorAll('.page-hero a[href="quote.html"], .mobile-sticky-cta a[href="quote.html"]'));
+  const updateProductQuoteLinks = () => {
+    const productQuoteData = collectProductQuoteData();
+
+    if (!productQuoteData || !productQuoteLinks.length) {
+      return;
+    }
+
+    productQuoteLinks.forEach((link) => {
+      const baseHref = link.dataset.quoteBaseHref || link.getAttribute('href') || 'quote.html';
+      link.setAttribute('href', buildQuoteUrl(baseHref, productQuoteData));
+    });
+  };
+
+  if (productQuoteLinks.length) {
+    productQuoteLinks.forEach((link) => {
+      link.dataset.quoteBaseHref = link.getAttribute('href') || 'quote.html';
+      link.addEventListener('click', updateProductQuoteLinks);
+    });
+
+    const qtyField = document.querySelector('.page-hero [data-quote-qty]');
+    if (qtyField) {
+      qtyField.addEventListener('input', updateProductQuoteLinks);
+      qtyField.addEventListener('change', updateProductQuoteLinks);
+    }
+
+    updateProductQuoteLinks();
+  }
+
+  document.querySelectorAll('.feature-card a[href="quote.html"], .product-list-item a[href="quote.html"]').forEach((link) => {
+    const card = link.closest('.feature-card, .product-list-item');
+    const cardQuoteData = collectCardQuoteData(card);
+
+    if (!cardQuoteData) {
+      return;
+    }
+
+    link.setAttribute('href', buildQuoteUrl(link.getAttribute('href') || 'quote.html', cardQuoteData));
+  });
 
   document.querySelectorAll('[data-quote-calc]').forEach((wrapper) => {
     const qtyField = wrapper.querySelector('[data-quote-qty]');
@@ -107,6 +328,50 @@
       sourcePageField.value = currentPageName;
     }
   };
+  const prefillQuoteForm = () => {
+    const params = new URLSearchParams(window.location.search);
+    const itemCategory = normalizeText(params.get('item_category'));
+    const itemName = normalizeText(params.get('item_name'));
+    const size = normalizeText(params.get('size'));
+    const strength = normalizeText(params.get('strength'));
+    const qty = normalizeText(params.get('qty'));
+    const itemField = quoteForm.elements.namedItem('item');
+    const sizeField = quoteForm.elements.namedItem('size');
+    const strengthField = quoteForm.elements.namedItem('strength');
+    const qtyField = quoteForm.elements.namedItem('qty');
+    const extraField = quoteForm.elements.namedItem('extra');
+    const normalizedStrength = mapStrengthOption(strength);
+    const combinedSize = itemName && size ? `${itemName} / ${size}` : (size || itemName);
+    const notes = [];
+
+    if (itemField instanceof HTMLSelectElement) {
+      setSelectValue(itemField, itemCategory);
+    }
+
+    if (sizeField instanceof HTMLInputElement && combinedSize) {
+      sizeField.value = combinedSize;
+    }
+
+    if (strengthField instanceof HTMLSelectElement && normalizedStrength) {
+      setSelectValue(strengthField, normalizedStrength);
+    }
+
+    if (qtyField instanceof HTMLInputElement && qty) {
+      qtyField.value = qty;
+    }
+
+    if (itemName && (!combinedSize || !combinedSize.includes(itemName))) {
+      notes.push(`선택 상품: ${itemName}`);
+    }
+
+    if (strength && (!normalizedStrength || normalizedStrength !== strength)) {
+      notes.push(`재질/골 참고: ${strength}`);
+    }
+
+    if (extraField instanceof HTMLTextAreaElement) {
+      appendLines(extraField, notes);
+    }
+  };
 
   const parseJsonResponse = async (response) => {
     const responseText = await response.text();
@@ -123,6 +388,7 @@
   };
 
   resetSourcePageValue();
+  prefillQuoteForm();
 
   quoteForm.addEventListener('submit', async (event) => {
     event.preventDefault();

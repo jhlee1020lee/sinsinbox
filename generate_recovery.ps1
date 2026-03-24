@@ -190,7 +190,7 @@ $shippingMain = @"
     <section class="section-shell" style="padding:28px;">
       <h2 class="section-title">결제 안내</h2>
       <table class="support-table">
-        <tr><th>결제 방식</th><td>주문 내용 확인 후 가능한 결제 방법을 안내합니다. 카드 결제는 지원하지 않습니다.</td></tr>
+        <tr><th>결제 방식</th><td>주문 내용 확인 후 가능한 결제 방법을 안내합니다.</td></tr>
         <tr><th>입금 확인</th><td>입금 확인 후 출고 또는 제작 준비를 진행합니다.</td></tr>
         <tr><th>계좌 정보</th><td>신한은행 100-036-265883 / 예금주: 신신지업사(이재진)</td></tr>
       </table>
@@ -438,7 +438,6 @@ $calcHtml
         <li>주문 전 규격, 수량, 납품 방식을 확인한 뒤 견적을 안내합니다.</li>
         <li>배송은 택배, 퀵, 방문수령 중 가능한 방식으로 안내합니다.</li>
         <li>배송비는 기본 착불이며, 품목과 지역에 따라 달라질 수 있습니다.</li>
-        <li>카드 결제는 지원하지 않습니다.</li>
       </ul>
       <div class="cta-row"><a class="btn" href="shipping.html">거래안내 보기</a></div>
     </section>
