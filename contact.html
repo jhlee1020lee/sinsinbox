@@ -16,7 +16,7 @@
   <link rel='shortcut icon' href='assets/favicon.svg'>
   <link rel='stylesheet' href='assets/style.css'>
 </head>
-<body>
+<body class='contact-page no-mobile-cta'>
 <div class="shop-utility">
   <div class="container utility-inner">
     <div class="utility-meta">
@@ -39,7 +39,6 @@
     <div class="header-actions">
       <nav class="nav" aria-label="주요 메뉴">
         <a href='products.html'>상품안내</a>
-        <a href='quote.html'>맞춤견적</a>
         <a href='shipping.html'>거래안내</a>
         <a href='contact.html' class='is-current'>문의/오시는 길</a>
       </nav>
@@ -49,7 +48,6 @@
   <div class="mobile-nav" id="mobileNav" data-mobile-nav>
     <div class="container">
       <a href='products.html'>상품안내</a>
-        <a href='quote.html'>맞춤견적</a>
         <a href='shipping.html'>거래안내</a>
         <a href='contact.html' class='is-current'>문의/오시는 길</a>
       <a href="quote.html">맞춤견적 요청</a>
@@ -61,26 +59,25 @@
     <div class='breadcrumb'><a href='index.html'>홈</a> / 문의 / 오시는 길</div>
     <div class='contact-grid'>
       <div class='page-hero'>
-        <div class='section-label'>Contact</div>
+        <div class='section-label'>문의 안내</div>
         <h1 class='page-title'>문의 / 오시는 길</h1>
         <div class='contact-list'>
           <div class='phone-line'><span class='contact-label'>전화번호</span><span class='contact-value phone-pair'><a href='tel:02-2269-4933'>02-2269-4933</a><a href='tel:02-2268-9059'>02-2268-9059</a></span></div>
           <div><span class='contact-label'>이메일</span><span class='contact-value'><a href='mailto:sinsin4933@gmail.com'>sinsin4933@gmail.com</a></span></div>
-          <div><span class='contact-label'>주소</span><span class='contact-value address-fragments'><span>서울 중구 을지로35길 8</span><span>1층(방산시장 내)</span></span></div>
-          <div><span class='contact-label'>영업시간</span><span class='contact-value hours-fragments'><span>평일 08:00~18:00</span><span>토요일·공휴일 08:00~14:00</span><span>일요일 휴무</span></span></div>
         </div>
+        <div class='cta-row'><a class='btn primary' href='quote.html'>맞춤견적 요청</a><a class='btn' href='tel:02-2269-4933'>전화문의</a></div>
       </div>
       <figure class='contact-hero-media'><img src='assets/images/home/storefront-hero.jpg' alt='신신지업사 매장 전경'></figure>
     </div>
     <section class='support-shell'>
-      <div class='section-head compact'><div><div class='section-label'>Directions</div><h2 class='section-title'>오시는 길</h2></div></div>
+      <div class='section-head compact'><div><div class='section-label'>길안내</div><h2 class='section-title'>오시는 길</h2></div></div>
       <div class='contact-card-grid'>
         <article class='contact-card'><h3>주소</h3><p class='address-fragments'><span>서울 중구 을지로35길 8</span><span>1층(방산시장 내)</span></p></article>
         <article class='contact-card'><h3>지도 보기</h3><p>지도 서비스에서 매장 위치를 바로 확인하실 수 있습니다.</p><div class='contact-actions'><a class='btn small' href='https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EC%9D%84%EC%A7%80%EB%A1%9C35%EA%B8%B8%208' target='_blank' rel='noopener noreferrer'>네이버 지도</a><a class='btn small' href='https://map.kakao.com/?q=%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EC%9D%84%EC%A7%80%EB%A1%9C35%EA%B8%B8%208' target='_blank' rel='noopener noreferrer'>카카오맵</a></div></article>
       </div>
     </section>
     <section class='support-shell'>
-      <div class='section-head compact'><div><div class='section-label'>Visit Guide</div><h2 class='section-title'>방문 안내</h2></div></div>
+      <div class='section-head compact'><div><div class='section-label'>방문 안내</div><h2 class='section-title'>방문 안내</h2></div></div>
       <div class='support-summary-grid'>
         <article class='support-card'><h3>방문수령</h3><p>준비 여부를 먼저 확인한 뒤 방문수령하실 수 있습니다.</p></article>
         <article class='support-card'><h3>수령 방식</h3><p>택배, 퀵, 방문수령 중 가능한 방법을 안내합니다.</p></article>
@@ -89,12 +86,11 @@
       </div>
     </section>
     <section class='support-shell'>
-      <div class='section-head compact'><div><div class='section-label'>Inquiry</div><h2 class='section-title'>문의</h2></div></div>
+      <div class='section-head compact'><div><div class='section-label'>문의 접수</div><h2 class='section-title'>문의</h2></div></div>
       <div class='contact-card-grid'>
-        <article class='contact-card'><h3>전화 문의</h3><p>규격과 수량이 정리되지 않아도 우선 문의하실 수 있습니다.</p></article>
-        <article class='contact-card'><h3>이메일 문의</h3><p>도면이나 참고 내용을 함께 보내실 경우 이메일 문의를 이용해 주세요.</p></article>
+        <article class='contact-card'><h3>전화 문의</h3><p>규격과 수량이 정리되지 않아도 우선 문의하실 수 있습니다.</p><div class='contact-actions'><a class='btn small' href='tel:02-2269-4933'>02-2269-4933</a><a class='btn small' href='tel:02-2268-9059'>02-2268-9059</a></div></article>
+        <article class='contact-card'><h3>이메일 문의</h3><p>도면이나 참고 내용을 함께 보내실 경우 이메일 문의를 이용해 주세요.</p><div class='contact-actions'><a class='btn small' href='mailto:sinsin4933@gmail.com'>sinsin4933@gmail.com</a></div></article>
       </div>
-      <div class='cta-row'><a class='btn primary' href='quote.html'>맞춤견적 요청</a><a class='btn' href='tel:02-2269-4933'>전화문의</a></div>
     </section>
   </div>
 </section>

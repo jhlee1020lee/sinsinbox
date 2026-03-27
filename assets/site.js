@@ -5,6 +5,10 @@
   const stickyCta = document.querySelector('.mobile-sticky-cta');
   const normalizeText = (value) => (value || '').replace(/\s+/g, ' ').trim();
   const readText = (node) => normalizeText(node && node.textContent);
+  const currentPageName = (() => {
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+    return pathParts[pathParts.length - 1] || 'index.html';
+  })();
   const appConfig = window.APP_CONFIG || {};
   const analyticsConfig = appConfig.ANALYTICS || {};
   const gaMeasurementId = normalizeText(analyticsConfig.GA4_MEASUREMENT_ID);
@@ -143,11 +147,28 @@
       return 'D형박스';
     }
 
+    if (source.includes('주문 안내') || source.includes('제작·납기') || source.includes('FAQ') || source.includes('기타(FAQ)')) {
+      return '주문 안내';
+    }
+
     if (source.includes('골판지')) {
       return '골판지(양면 / 편면)';
     }
 
     return '기타 포장자재';
+  };
+  const normalizeQuoteItemCategory = (value) => {
+    const normalized = normalizeText(value);
+
+    if (!normalized) {
+      return '';
+    }
+
+    if (normalized.includes('주문 안내') || normalized.includes('제작·납기') || normalized.includes('FAQ') || normalized.includes('기타(FAQ)')) {
+      return '주문 안내';
+    }
+
+    return normalized;
   };
   const mapStrengthOption = (strengthText) => {
     const normalized = normalizeText(strengthText).toUpperCase();
@@ -312,22 +333,121 @@
 
   initializeAnalytics();
 
+  const syncCurrentNavLinks = () => {
+    document.querySelectorAll('.nav a, .mobile-nav a').forEach((link) => {
+      const href = link.getAttribute('href') || '';
+      const target = parseLinkTarget(href);
+      const isCurrent = link.classList.contains('is-current') || (target.fileName && target.fileName === currentPageName);
+
+      if (isCurrent) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  };
+
+  syncCurrentNavLinks();
+
   if (toggleButton && mobileNav) {
-    toggleButton.addEventListener('click', () => {
-      const isOpen = mobileNav.classList.toggle('is-open');
+    const mobileNavMedia = typeof window.matchMedia === 'function'
+      ? window.matchMedia('(max-width: 860px)')
+      : null;
+    const setMobileNavState = (isOpen) => {
+      mobileNav.classList.toggle('is-open', isOpen);
+      mobileNav.hidden = !isOpen;
+      mobileNav.setAttribute('aria-hidden', String(!isOpen));
       toggleButton.setAttribute('aria-expanded', String(isOpen));
+      toggleButton.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
+      body.classList.toggle('mobile-nav-open', isOpen);
+    };
+    const closeMobileNav = ({ restoreFocus = false } = {}) => {
+      if (!mobileNav.classList.contains('is-open')) {
+        setMobileNavState(false);
+        return;
+      }
+
+      setMobileNavState(false);
+
+      if (restoreFocus) {
+        toggleButton.focus();
+      }
+    };
+
+    setMobileNavState(false);
+
+    toggleButton.addEventListener('click', () => {
+      setMobileNavState(!mobileNav.classList.contains('is-open'));
     });
 
     mobileNav.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
-        mobileNav.classList.remove('is-open');
-        toggleButton.setAttribute('aria-expanded', 'false');
+        closeMobileNav();
       });
     });
+
+    document.addEventListener('click', (event) => {
+      if (!mobileNav.classList.contains('is-open')) {
+        return;
+      }
+
+      const target = event.target;
+      if (!(target instanceof Node)) {
+        return;
+      }
+
+      if (toggleButton.contains(target) || mobileNav.contains(target)) {
+        return;
+      }
+
+      closeMobileNav();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || !mobileNav.classList.contains('is-open')) {
+        return;
+      }
+
+      event.preventDefault();
+      closeMobileNav({ restoreFocus: true });
+    });
+
+    if (mobileNavMedia) {
+      const handleMobileNavViewport = (event) => {
+        if (!event.matches) {
+          closeMobileNav();
+        }
+      };
+
+      if (typeof mobileNavMedia.addEventListener === 'function') {
+        mobileNavMedia.addEventListener('change', handleMobileNavViewport);
+      } else if (typeof mobileNavMedia.addListener === 'function') {
+        mobileNavMedia.addListener(handleMobileNavViewport);
+      }
+    }
   }
 
   if (stickyCta) {
-    body.classList.add('has-mobile-cta');
+    const syncStickyCtaState = (isMobileViewport) => {
+      body.classList.toggle('has-mobile-cta', !body.classList.contains('no-mobile-cta') && isMobileViewport);
+    };
+
+    if (typeof window.matchMedia === 'function') {
+      const stickyCtaMedia = window.matchMedia('(max-width: 860px)');
+      const handleStickyCtaViewport = (event) => {
+        syncStickyCtaState(event.matches);
+      };
+
+      if (typeof stickyCtaMedia.addEventListener === 'function') {
+        stickyCtaMedia.addEventListener('change', handleStickyCtaViewport);
+      } else if (typeof stickyCtaMedia.addListener === 'function') {
+        stickyCtaMedia.addListener(handleStickyCtaViewport);
+      }
+
+      syncStickyCtaState(stickyCtaMedia.matches);
+    } else {
+      syncStickyCtaState(true);
+    }
   }
 
   const productTabs = document.querySelectorAll('.product-tabs a');
@@ -456,6 +576,45 @@
   const submitButton = document.getElementById('quoteSubmitButton');
   const statusNode = document.getElementById('quoteFormStatus');
   const sourcePageField = document.getElementById('quoteSourcePage');
+  const quoteItemField = quoteForm.elements.namedItem('item');
+  const quoteSizeField = quoteForm.elements.namedItem('size');
+  const quoteStrengthField = quoteForm.elements.namedItem('strength');
+  const quoteQtyField = quoteForm.elements.namedItem('qty');
+  const quotePrintField = quoteForm.elements.namedItem('print_type');
+  const quoteShippingField = quoteForm.elements.namedItem('shipping_method');
+  const quoteDueField = quoteForm.elements.namedItem('due_text');
+  const quoteExtraField = quoteForm.elements.namedItem('extra');
+  const quoteInquiryModeFields = Array.from(quoteForm.querySelectorAll('input[name="inquiry_mode_ui"]'));
+  const quoteItemLabel = quoteForm.querySelector('[data-quote-item-label]');
+  const quoteSizeLabel = quoteForm.querySelector('[data-quote-size-label]');
+  const quoteQtyLabel = quoteForm.querySelector('[data-quote-qty-label]');
+  const quoteShippingLabel = quoteForm.querySelector('[data-quote-shipping-label]');
+  const quoteDueLabel = quoteForm.querySelector('[data-quote-due-label]');
+  const quoteExtraLabel = quoteForm.querySelector('[data-quote-extra-label]');
+  const quoteModeSummary = quoteForm.querySelector('[data-quote-mode-summary]');
+  const quoteModeHelp = quoteForm.querySelector('[data-quote-mode-help]');
+  const quoteStrengthFieldWrap = quoteForm.querySelector('[data-quote-field="strength"]');
+  const quotePrintFieldWrap = quoteForm.querySelector('[data-quote-field="print"]');
+  const quoteShippingFieldWrap = quoteForm.querySelector('[data-quote-field="shipping"]');
+  const defaultItemLabel = quoteItemLabel ? readText(quoteItemLabel) || '품목' : '품목';
+  const defaultSizeLabel = quoteSizeLabel ? readText(quoteSizeLabel) || '규격 또는 문의 내용' : '규격 또는 문의 내용';
+  const defaultQtyLabel = quoteQtyLabel ? readText(quoteQtyLabel) || '수량' : '수량';
+  const defaultShippingLabel = quoteShippingLabel ? readText(quoteShippingLabel) || '희망 수령 방식' : '희망 수령 방식';
+  const defaultDueLabel = quoteDueLabel ? readText(quoteDueLabel) || '희망 일정' : '희망 일정';
+  const defaultExtraLabel = quoteExtraLabel ? readText(quoteExtraLabel) || '추가 요청 사항' : '추가 요청 사항';
+  const defaultModeSummary = quoteModeSummary ? readText(quoteModeSummary) || '규격과 수량이 정해진 품목 견적에 적합합니다.' : '규격과 수량이 정해진 품목 견적에 적합합니다.';
+  const defaultSizePlaceholder = quoteSizeField instanceof HTMLInputElement
+    ? quoteSizeField.getAttribute('placeholder') || ''
+    : '';
+  const defaultQtyPlaceholder = quoteQtyField instanceof HTMLInputElement
+    ? quoteQtyField.getAttribute('placeholder') || ''
+    : '';
+  const defaultDuePlaceholder = quoteDueField instanceof HTMLInputElement
+    ? quoteDueField.getAttribute('placeholder') || ''
+    : '';
+  const defaultExtraPlaceholder = quoteExtraField instanceof HTMLTextAreaElement
+    ? quoteExtraField.getAttribute('placeholder') || ''
+    : '';
   const quoteFieldOrder = [
     'item',
     'size',
@@ -471,11 +630,6 @@
     'source_page',
     'website'
   ];
-  const currentPageName = (() => {
-    const pathParts = window.location.pathname.split('/').filter(Boolean);
-    return pathParts[pathParts.length - 1] || 'quote.html';
-  })();
-
   const setStatus = (message, type) => {
     if (!statusNode) {
       return;
@@ -490,9 +644,127 @@
       sourcePageField.value = currentPageName;
     }
   };
+  const getSelectedQuoteInquiryMode = () => {
+    const checkedField = quoteInquiryModeFields.find((field) => field.checked);
+    return checkedField && checkedField.value === 'general' ? 'general' : 'product';
+  };
+  const setSelectedQuoteInquiryMode = (mode) => {
+    const nextMode = mode === 'general' ? 'general' : 'product';
+
+    quoteInquiryModeFields.forEach((field) => {
+      field.checked = field.value === nextMode;
+    });
+  };
+  const inferQuoteInquiryMode = ({ requestedMode = '', itemCategory = '', itemName = '' } = {}) => {
+    const normalizedMode = normalizeText(requestedMode).toLowerCase();
+    const normalizedCategory = normalizeQuoteItemCategory(itemCategory);
+    const normalizedItemName = normalizeText(itemName);
+
+    if (normalizedMode === 'general') {
+      return 'general';
+    }
+
+    if (normalizedMode === 'product') {
+      return 'product';
+    }
+
+    if (normalizedCategory === '주문 안내') {
+      return 'general';
+    }
+
+    if (normalizedItemName.includes('상담')) {
+      return 'general';
+    }
+
+    return 'product';
+  };
+  const toggleQuoteField = (fieldWrap, fieldControl, isVisible) => {
+    if (fieldWrap instanceof HTMLElement) {
+      fieldWrap.hidden = !isVisible;
+    }
+
+    if (fieldControl instanceof HTMLInputElement || fieldControl instanceof HTMLSelectElement || fieldControl instanceof HTMLTextAreaElement) {
+      fieldControl.disabled = !isVisible;
+      fieldControl.setCustomValidity('');
+    }
+  };
+  const syncQuoteFormMode = () => {
+    const isOrderGuideInquiry = quoteItemField instanceof HTMLSelectElement
+      && normalizeQuoteItemCategory(quoteItemField.value) === '주문 안내';
+    const isGeneralInquiry = getSelectedQuoteInquiryMode() === 'general' || isOrderGuideInquiry;
+
+    if (isOrderGuideInquiry) {
+      setSelectedQuoteInquiryMode('general');
+    }
+
+    if (quoteModeSummary) {
+      quoteModeSummary.textContent = isGeneralInquiry
+        ? '제작 가능 여부, 납기, 단가 기준처럼 제품 확정 전 문의에 적합합니다.'
+        : defaultModeSummary;
+    }
+
+    if (quoteItemLabel) {
+      quoteItemLabel.textContent = isGeneralInquiry ? '문의 주제' : defaultItemLabel;
+    }
+
+    if (quoteSizeLabel) {
+      quoteSizeLabel.textContent = isGeneralInquiry ? '문의 내용' : defaultSizeLabel;
+    }
+
+    if (quoteQtyLabel) {
+      quoteQtyLabel.textContent = isGeneralInquiry ? '수량(선택)' : defaultQtyLabel;
+    }
+
+    if (quoteShippingLabel) {
+      quoteShippingLabel.textContent = defaultShippingLabel;
+    }
+
+    if (quoteDueLabel) {
+      quoteDueLabel.textContent = isGeneralInquiry ? '희망 일정(선택)' : defaultDueLabel;
+    }
+
+    if (quoteExtraLabel) {
+      quoteExtraLabel.textContent = isGeneralInquiry ? '추가 참고 사항' : defaultExtraLabel;
+    }
+
+    if (quoteSizeField instanceof HTMLInputElement) {
+      quoteSizeField.placeholder = isGeneralInquiry
+        ? '예: 납기 문의 / 제작 가능 여부 / 단가 기준 문의'
+        : defaultSizePlaceholder;
+    }
+
+    if (quoteQtyField instanceof HTMLInputElement) {
+      quoteQtyField.required = !isGeneralInquiry;
+      quoteQtyField.placeholder = isGeneralInquiry
+        ? '상담·일반 문의는 비워 두셔도 됩니다'
+        : defaultQtyPlaceholder;
+      quoteQtyField.setCustomValidity('');
+    }
+
+    if (quoteDueField instanceof HTMLInputElement) {
+      quoteDueField.placeholder = isGeneralInquiry
+        ? '예: 다음 주까지 / 상담 후 결정'
+        : defaultDuePlaceholder;
+    }
+
+    if (quoteExtraField instanceof HTMLTextAreaElement) {
+      quoteExtraField.placeholder = isGeneralInquiry
+        ? '방문 여부, 답변 방식, 배송지 등 참고할 사항이 있으면 적어 주세요'
+        : defaultExtraPlaceholder;
+    }
+
+    toggleQuoteField(quoteStrengthFieldWrap, quoteStrengthField, !isGeneralInquiry);
+    toggleQuoteField(quotePrintFieldWrap, quotePrintField, !isGeneralInquiry);
+    toggleQuoteField(quoteShippingFieldWrap, quoteShippingField, !isGeneralInquiry);
+
+    if (quoteModeHelp) {
+      quoteModeHelp.hidden = !isGeneralInquiry;
+    }
+  };
   const prefillQuoteForm = () => {
     const params = new URLSearchParams(window.location.search);
-    const itemCategory = normalizeText(params.get('item_category'));
+    const requestedMode = normalizeText(params.get('inquiry_mode') || params.get('mode'));
+    const itemCategory = normalizeQuoteItemCategory(params.get('item_category'));
     const itemName = normalizeText(params.get('item_name'));
     const size = normalizeText(params.get('size'));
     const strength = normalizeText(params.get('strength'));
@@ -503,8 +775,15 @@
     const qtyField = quoteForm.elements.namedItem('qty');
     const extraField = quoteForm.elements.namedItem('extra');
     const normalizedStrength = mapStrengthOption(strength);
-    const combinedSize = itemName && size ? `${itemName} / ${size}` : (size || itemName);
+    const inferredInquiryMode = inferQuoteInquiryMode({ requestedMode, itemCategory, itemName });
+    const combinedSize = inferredInquiryMode === 'general'
+      ? ''
+      : itemName && size ? `${itemName} / ${size}` : (size || itemName);
     const notes = [];
+
+    if (quoteInquiryModeFields.length) {
+      setSelectedQuoteInquiryMode(inferredInquiryMode);
+    }
 
     if (itemField instanceof HTMLSelectElement) {
       setSelectValue(itemField, itemCategory);
@@ -522,12 +801,22 @@
       qtyField.value = qty;
     }
 
-    if (itemName && (!combinedSize || !combinedSize.includes(itemName))) {
-      notes.push(`선택 상품: ${itemName}`);
-    }
+    if (inferredInquiryMode === 'general') {
+      if (itemName) {
+        notes.push(`문의 주제: ${itemName}`);
+      }
 
-    if (strength && (!normalizedStrength || normalizedStrength !== strength)) {
-      notes.push(`재질/골 참고: ${strength}`);
+      if (size) {
+        notes.push(`참고 내용: ${size}`);
+      }
+    } else {
+      if (itemName && (!combinedSize || !combinedSize.includes(itemName))) {
+        notes.push(`선택 상품: ${itemName}`);
+      }
+
+      if (strength && (!normalizedStrength || normalizedStrength !== strength)) {
+        notes.push(`재질/골 참고: ${strength}`);
+      }
     }
 
     if (extraField instanceof HTMLTextAreaElement) {
@@ -551,6 +840,17 @@
 
   resetSourcePageValue();
   prefillQuoteForm();
+  syncQuoteFormMode();
+
+  if (quoteItemField instanceof HTMLSelectElement) {
+    quoteItemField.addEventListener('change', syncQuoteFormMode);
+  }
+
+  if (quoteInquiryModeFields.length) {
+    quoteInquiryModeFields.forEach((field) => {
+      field.addEventListener('change', syncQuoteFormMode);
+    });
+  }
 
   quoteForm.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -629,6 +929,7 @@
 
       quoteForm.reset();
       resetSourcePageValue();
+      syncQuoteFormMode();
       trackEvent('quote_form_submit_success', quoteEventParams);
       setStatus('견적 요청이 접수되었습니다. 확인 후 연락드리겠습니다.', 'success');
     } catch (error) {
