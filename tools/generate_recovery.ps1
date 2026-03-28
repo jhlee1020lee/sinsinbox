@@ -334,7 +334,6 @@ $products = @(
   @{ File='product-21-item-26.html'; Title='골판지(편면) ITEM-26'; Category='골판지(편면)'; Code='ITEM-26'; Lead='상담 후 안내'; Spec='1100×788'; Material='편면(모조, 모조)'; Price='1,500원'; Min='10개부터'; Desc='골판지(편면) ITEM-26 규격과 재질 안내입니다.'; Image='assets/images/home/board-closeup.jpg'; ImageAlt='골판지 근접 사진'; Calc='1500' },
   @{ File='product-22-item-27.html'; Title='골판지(편면) ITEM-27'; Category='골판지(편면)'; Code='ITEM-27'; Lead='상담 후 안내'; Spec='1100×800'; Material='편면(SK/E골, 白E골)'; Price='1,000원'; Min='10개부터'; Desc='골판지(편면) ITEM-27 규격과 재질 안내입니다.'; Image='assets/images/home/board-closeup.jpg'; ImageAlt='골판지 근접 사진'; Calc='1000' },
   @{ File='product-23-item-28.html'; Title='골판지(편면) ITEM-28'; Category='골판지(편면)'; Code='ITEM-28'; Lead='상담 후 안내'; Spec='800×1100'; Material='편면(白/F골)'; Price='2,000원'; Min='10개부터'; Desc='골판지(편면) ITEM-28 규격과 재질 안내입니다.'; Image='assets/images/home/board-closeup.jpg'; ImageAlt='골판지 근접 사진'; Calc='2000' },
-  @{ File='product-24-pvc.html'; Title='PVC 상담 항목'; Category='맞춤 제작 상담'; Code='PVC'; Lead='상담 후 안내'; Spec='규격 상담'; Material='용도와 재질 확인 후 안내'; Price='견적 문의'; Min='상담 후 안내'; Desc='PVC 상담 항목 안내 페이지입니다.'; Image=''; ImageAlt=''; Calc='' },
 )
 
 foreach ($p in $products) {
