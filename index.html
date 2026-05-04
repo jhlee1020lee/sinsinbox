@@ -5,16 +5,902 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>박스 · 골판지 · 포장자재 | 신신지업사</title>
   <meta name="description" content="신신지업사는 박스, 골판지, 포장자재를 취급하며 품목과 수량, 납품 방식에 따라 견적과 출고 일정을 안내합니다.">
-  <link rel="canonical" href="https://xn--vf4b93ba870atzg.com/">
+  <link rel="canonical" href="index.html">
   <meta property="og:title" content="박스 · 골판지 · 포장자재 | 신신지업사">
   <meta property="og:description" content="신신지업사는 박스, 골판지, 포장자재를 취급하며 품목과 수량, 납품 방식에 따라 견적과 출고 일정을 안내합니다.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://xn--vf4b93ba870atzg.com/">
-  <meta property="og:image" content="https://xn--vf4b93ba870atzg.com/assets/images/home/storefront-hero.jpg">
+  <meta property="og:url" content="index.html">
+  <meta property="og:image" content="assets/images/home/storefront-hero.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="shortcut icon" href="assets/favicon.svg">
   <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .home-page {
+      --ibm-blue: #0f62fe;
+      --ibm-blue-hover: #0353e9;
+      --ibm-blue-active: #002d9c;
+      --ibm-ink: #161616;
+      --ibm-muted: #525252;
+      --ibm-subtle: #8d8d8d;
+      --ibm-canvas: #ffffff;
+      --ibm-surface: #f4f4f4;
+      --ibm-surface-2: #e0e0e0;
+      --ibm-border: #e0e0e0;
+      --ibm-inverse: #161616;
+      --ibm-inverse-2: #262626;
+      --ibm-inverse-muted: #c6c6c6;
+      color: var(--ibm-ink);
+      background: var(--ibm-canvas);
+      font-family: "IBM Plex Sans", "Helvetica Neue", Arial, "Noto Sans KR", "Malgun Gothic", sans-serif;
+      line-height: 1.5;
+      letter-spacing: 0.16px;
+    }
+
+    .home-page .container {
+      width: min(1584px, calc(100% - 64px));
+      margin: 0 auto;
+    }
+
+    .home-page .shop-utility {
+      background: var(--ibm-surface);
+      border-bottom: 1px solid var(--ibm-border);
+    }
+
+    .home-page .utility-inner {
+      min-height: 32px;
+    }
+
+    .home-page .utility-meta {
+      color: var(--ibm-muted);
+      font-size: 12px;
+      line-height: 1.33;
+      letter-spacing: 0.32px;
+    }
+
+    .home-page .utility-meta strong,
+    .home-page .utility-meta a,
+    .home-page .info-label {
+      color: var(--ibm-ink);
+      font-weight: 400;
+    }
+
+    .home-page .utility-meta > * + * {
+      border-left: 1px solid var(--ibm-border);
+    }
+
+    .home-page .mobile-utility-toggle {
+      min-height: 44px;
+      border: 0;
+      border-left: 1px solid var(--ibm-border);
+      border-radius: 0;
+      background: var(--ibm-surface);
+      color: var(--ibm-ink);
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .home-page .header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--ibm-canvas);
+      border-bottom: 1px solid var(--ibm-border);
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+
+    .home-page .header-inner {
+      min-height: 48px;
+    }
+
+    .home-page .brand {
+      min-height: 48px;
+      gap: 16px;
+    }
+
+    .home-page .brand-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 0;
+      background: var(--ibm-ink);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.16px;
+    }
+
+    .home-page .brand-title {
+      color: var(--ibm-ink);
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.25;
+    }
+
+    .home-page .brand-sub {
+      color: var(--ibm-muted);
+      font-size: 12px;
+      letter-spacing: 0.32px;
+      line-height: 1.33;
+    }
+
+    .home-page .nav {
+      gap: 0;
+    }
+
+    .home-page .nav a {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 18px;
+      border-left: 1px solid transparent;
+      border-right: 1px solid transparent;
+      border-radius: 0;
+      color: var(--ibm-ink);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.16px;
+    }
+
+    .home-page .nav a:hover,
+    .home-page .nav a[aria-current="page"] {
+      background: var(--ibm-surface);
+      color: var(--ibm-ink);
+    }
+
+    .home-page .btn {
+      min-height: 48px;
+      padding: 12px 16px;
+      border: 1px solid var(--ibm-blue);
+      border-radius: 0;
+      background: var(--ibm-canvas);
+      color: var(--ibm-blue);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.29;
+      letter-spacing: 0.16px;
+      box-shadow: none;
+    }
+
+    .home-page .btn:hover {
+      background: #edf5ff;
+      color: var(--ibm-blue-hover);
+    }
+
+    .home-page .btn:active {
+      background: #d0e2ff;
+      color: var(--ibm-blue-active);
+      transform: none;
+    }
+
+    .home-page .btn:focus-visible,
+    .home-page a:focus-visible,
+    .home-page button:focus-visible {
+      outline: 2px solid var(--ibm-blue);
+      outline-offset: -2px;
+    }
+
+    .home-page .btn.primary {
+      border-color: var(--ibm-blue);
+      background: var(--ibm-blue);
+      color: #ffffff;
+    }
+
+    .home-page .btn.primary:hover {
+      background: var(--ibm-blue-hover);
+      color: #ffffff;
+    }
+
+    .home-page .btn.primary:active {
+      background: var(--ibm-blue-active);
+    }
+
+    .home-page .btn.secondary {
+      border-color: var(--ibm-ink);
+      background: var(--ibm-ink);
+      color: #ffffff;
+    }
+
+    .home-page .btn.utility {
+      border-color: var(--ibm-border);
+      background: var(--ibm-canvas);
+      color: var(--ibm-blue);
+    }
+
+    .home-page .btn.small {
+      min-height: 44px;
+      padding: 10px 14px;
+      font-size: 14px;
+    }
+
+    .home-page .mobile-nav {
+      border-top: 1px solid var(--ibm-border);
+      background: var(--ibm-canvas);
+    }
+
+    .home-page .mobile-nav .container {
+      padding: 0;
+    }
+
+    .home-page .mobile-nav a {
+      min-height: 48px;
+      padding: 0 16px;
+      border: 0;
+      border-bottom: 1px solid var(--ibm-border);
+      border-radius: 0;
+      background: var(--ibm-canvas);
+      color: var(--ibm-ink);
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .home-page main > section {
+      padding: 96px 0;
+      border-bottom: 1px solid var(--ibm-border);
+      background: var(--ibm-canvas);
+    }
+
+    .home-page main > section:nth-child(even) {
+      background: var(--ibm-surface);
+    }
+
+    .home-page .home-hero {
+      padding: 0;
+      background: var(--ibm-canvas);
+    }
+
+    .home-page .hero-layout {
+      display: grid;
+      grid-template-columns: repeat(16, minmax(0, 1fr));
+      min-height: 640px;
+    }
+
+    .home-page .hero-copy {
+      grid-column: 1 / span 7;
+      display: grid;
+      align-content: center;
+      gap: 24px;
+      padding: 64px 48px 64px 0;
+      border: 0;
+      border-right: 1px solid var(--ibm-border);
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .home-page .hero-media {
+      grid-column: 8 / span 9;
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      border: 0;
+      border-radius: 0;
+      background: var(--ibm-surface);
+      box-shadow: none;
+    }
+
+    .home-page .hero-media img {
+      width: 100%;
+      height: 100%;
+      min-height: 640px;
+      object-fit: cover;
+    }
+
+    .home-page .section-label {
+      margin: 0;
+      color: var(--ibm-muted);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.29;
+      letter-spacing: 0.16px;
+      text-transform: none;
+    }
+
+    .home-page .section-label::before {
+      display: none;
+    }
+
+    .home-page .hero-title {
+      max-width: 680px;
+      margin: 0;
+      color: var(--ibm-ink);
+      font-size: 64px;
+      font-weight: 300;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .home-page .hero-copy p {
+      max-width: 560px;
+      margin: 0;
+      color: var(--ibm-muted);
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0;
+    }
+
+    .home-page .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-top: 8px;
+    }
+
+    .home-page .hero-subinfo {
+      margin: 8px 0 0;
+      padding: 16px 0 0;
+      border-top: 1px solid var(--ibm-border);
+    }
+
+    .home-page .hero-subinfo .help {
+      color: var(--ibm-muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .home-page .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+      align-items: end;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .home-page .section-head.compact {
+      grid-template-columns: minmax(0, 8fr);
+      align-items: start;
+    }
+
+    .home-page .section-head > div {
+      display: grid;
+      gap: 12px;
+    }
+
+    .home-page .section-title {
+      margin: 0;
+      color: var(--ibm-ink);
+      font-size: 42px;
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .home-page .section-lead {
+      max-width: 640px;
+      margin: 0;
+      color: var(--ibm-muted);
+      font-size: 18px;
+      line-height: 1.5;
+      letter-spacing: 0;
+    }
+
+    .home-page .trust-strip,
+    .home-page .category-grid,
+    .home-page .featured-grid,
+    .home-page .process-grid,
+    .home-page .support-summary-grid,
+    .home-page .photo-grid,
+    .home-page .contact-card-grid {
+      display: grid;
+      gap: 0;
+    }
+
+    .home-page .trust-strip,
+    .home-page .category-grid,
+    .home-page .featured-grid,
+    .home-page .process-grid,
+    .home-page .contact-card-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .home-page .support-summary-grid,
+    .home-page .photo-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .home-page .trust-item,
+    .home-page .category-card,
+    .home-page .feature-card,
+    .home-page .process-card,
+    .home-page .support-card,
+    .home-page .contact-card,
+    .home-page .photo-card {
+      min-width: 0;
+      border: 1px solid var(--ibm-border);
+      border-right-width: 0;
+      border-radius: 0;
+      background: var(--ibm-canvas);
+      box-shadow: none;
+    }
+
+    .home-page .trust-item:last-child,
+    .home-page .category-card:last-child,
+    .home-page .feature-card:last-child,
+    .home-page .process-card:last-child,
+    .home-page .support-card:last-child,
+    .home-page .contact-card:last-child,
+    .home-page .photo-card:last-child {
+      border-right-width: 1px;
+    }
+
+    .home-page .category-card,
+    .home-page .feature-card,
+    .home-page .process-card,
+    .home-page .support-card,
+    .home-page .contact-card {
+      display: grid;
+      align-content: start;
+      gap: 16px;
+      padding: 24px;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .home-page .trust-item {
+      padding: 24px;
+    }
+
+    .home-page .category-card:hover,
+    .home-page .feature-card:hover,
+    .home-page .support-card:hover {
+      background: var(--ibm-surface);
+      transform: none;
+      box-shadow: none;
+    }
+
+    .home-page .trust-item strong,
+    .home-page .category-card h3,
+    .home-page .feature-card h3,
+    .home-page .process-card h3,
+    .home-page .support-card h3,
+    .home-page .contact-card h3,
+    .home-page .photo-card h3 {
+      margin: 0;
+      color: var(--ibm-ink);
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 1.33;
+      letter-spacing: 0;
+    }
+
+    .home-page .trust-item strong {
+      display: block;
+      font-size: 20px;
+      line-height: 1.4;
+    }
+
+    .home-page .trust-item p,
+    .home-page .category-card p,
+    .home-page .feature-card p,
+    .home-page .process-card p,
+    .home-page .support-card p,
+    .home-page .contact-card p,
+    .home-page .photo-card p {
+      margin: 0;
+      color: var(--ibm-muted);
+      font-size: 14px;
+      line-height: 1.5;
+      letter-spacing: 0.16px;
+    }
+
+    .home-page .trust-item p {
+      margin-top: 12px;
+    }
+
+    .home-page .badges {
+      gap: 8px;
+    }
+
+    .home-page .badge {
+      min-height: 24px;
+      padding: 3px 8px;
+      border: 1px solid var(--ibm-border);
+      border-radius: 0;
+      background: var(--ibm-surface);
+      color: var(--ibm-muted);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.33;
+      letter-spacing: 0.32px;
+    }
+
+    .home-page .badge.strong {
+      border-color: var(--ibm-blue);
+      background: #edf5ff;
+      color: var(--ibm-blue);
+      font-weight: 400;
+    }
+
+    .home-page .feature-meta {
+      display: grid;
+      gap: 0;
+      margin-top: 8px;
+      border-top: 1px solid var(--ibm-border);
+    }
+
+    .home-page .feature-meta div {
+      display: grid;
+      gap: 4px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--ibm-border);
+    }
+
+    .home-page .guide-feature-card {
+      background: var(--ibm-canvas);
+      border-color: var(--ibm-border);
+    }
+
+    .home-page .guide-feature-card .feature-meta div {
+      padding: 12px 0;
+      border: 0;
+      border-bottom: 1px solid var(--ibm-border);
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .home-page .meta-label,
+    .home-page .contact-label {
+      color: var(--ibm-muted);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.33;
+      letter-spacing: 0.32px;
+    }
+
+    .home-page .meta-value,
+    .home-page .contact-value {
+      color: var(--ibm-ink);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0.16px;
+    }
+
+    .home-page .feature-price {
+      color: var(--ibm-ink);
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .home-page .process-number {
+      width: auto;
+      height: auto;
+      margin: 0 0 16px;
+      border-radius: 0;
+      background: transparent;
+      color: var(--ibm-blue);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.29;
+      letter-spacing: 0.16px;
+    }
+
+    .home-page .photo-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .home-page .photo-card img {
+      width: 100%;
+      height: 320px;
+      aspect-ratio: auto;
+      object-fit: cover;
+    }
+
+    .home-page .photo-card-body {
+      padding: 24px;
+      border-top: 1px solid var(--ibm-border);
+    }
+
+    .home-page .contact-shell {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .home-page .contact-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+    }
+
+    .home-page .contact-list div {
+      display: grid;
+      gap: 4px;
+    }
+
+    .home-page .contact-list a,
+    .home-page .footer-meta a {
+      color: var(--ibm-blue);
+    }
+
+    .home-page .contact-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0;
+    }
+
+    .home-page .mobile-sticky-cta {
+      border-top: 1px solid var(--ibm-border);
+      background: var(--ibm-canvas);
+      box-shadow: none;
+    }
+
+    .home-page .mobile-sticky-cta .btn {
+      flex: 1;
+      border-radius: 0;
+    }
+
+    .home-page .footer {
+      margin-top: 0;
+      background: var(--ibm-inverse);
+      border-top: 0;
+      color: var(--ibm-inverse-muted);
+    }
+
+    .home-page .footer .container {
+      padding: 64px 0;
+    }
+
+    .home-page .footer-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 8fr) minmax(280px, 4fr);
+      gap: 48px;
+      align-items: start;
+    }
+
+    .home-page .footer-title {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 1.33;
+      letter-spacing: 0;
+    }
+
+    .home-page .footer-meta {
+      color: var(--ibm-inverse-muted);
+      font-size: 14px;
+      line-height: 1.5;
+      letter-spacing: 0.16px;
+    }
+
+    .home-page .footer-info-label {
+      color: var(--ibm-inverse-muted);
+      font-weight: 400;
+    }
+
+    .home-page .footer-links {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid #393939;
+    }
+
+    .home-page .footer-links a {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #393939;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0.16px;
+    }
+
+    .home-page .footer-links a:hover {
+      background: var(--ibm-inverse-2);
+    }
+
+    @media (max-width: 1056px) {
+      .home-page .container {
+        width: min(1584px, calc(100% - 48px));
+      }
+
+      .home-page .hero-layout {
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        min-height: 0;
+      }
+
+      .home-page .hero-copy {
+        grid-column: 1 / span 4;
+        padding-right: 32px;
+      }
+
+      .home-page .hero-media {
+        grid-column: 5 / span 4;
+      }
+
+      .home-page .hero-media img {
+        min-height: 560px;
+      }
+
+      .home-page .hero-title {
+        font-size: 52px;
+      }
+
+      .home-page .featured-grid,
+      .home-page .process-grid,
+      .home-page .contact-card-grid,
+      .home-page .trust-strip,
+      .home-page .category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .home-page .support-summary-grid,
+      .home-page .photo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .home-page .trust-item:nth-child(2n),
+      .home-page .category-card:nth-child(2n),
+      .home-page .feature-card:nth-child(2n),
+      .home-page .process-card:nth-child(2n),
+      .home-page .contact-card:nth-child(2n) {
+        border-right-width: 1px;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .home-page .container {
+        width: min(1584px, calc(100% - 32px));
+      }
+
+      .home-page .shop-utility {
+        background: var(--ibm-inverse);
+      }
+
+      .home-page .utility-meta {
+        display: none;
+      }
+
+      .home-page .mobile-utility-toggle {
+        display: inline-flex;
+        min-width: 56px;
+        margin-left: 0;
+        border-left: 0;
+        border-right: 1px solid #393939;
+        background: var(--ibm-inverse);
+        color: #ffffff;
+      }
+
+      .home-page .header-inner {
+        min-height: 56px;
+      }
+
+      .home-page .brand {
+        min-height: 56px;
+      }
+
+      .home-page .brand-badge {
+        width: 40px;
+        height: 40px;
+      }
+
+      .home-page .nav,
+      .home-page .header-cta {
+        display: none;
+      }
+
+      .home-page main > section {
+        padding: 64px 0;
+      }
+
+      .home-page .home-hero {
+        padding: 0;
+      }
+
+      .home-page .hero-layout {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .home-page .hero-copy {
+        order: 1;
+        padding: 32px 0 36px;
+        border-right: 0;
+      }
+
+      .home-page .hero-media {
+        order: 2;
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .home-page .hero-media img {
+        height: 200px;
+        min-height: 0;
+      }
+
+      .home-page .hero-title {
+        font-size: 42px;
+      }
+
+      .home-page .section-head,
+      .home-page .section-head.compact {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .home-page .section-title {
+        font-size: 36px;
+      }
+
+      .home-page .featured-grid,
+      .home-page .process-grid,
+      .home-page .contact-card-grid,
+      .home-page .trust-strip,
+      .home-page .category-grid,
+      .home-page .support-summary-grid,
+      .home-page .photo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .home-page .trust-item,
+      .home-page .category-card,
+      .home-page .feature-card,
+      .home-page .process-card,
+      .home-page .support-card,
+      .home-page .contact-card,
+      .home-page .photo-card {
+        border-right-width: 1px;
+      }
+
+      .home-page .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .home-page .container {
+        width: min(1584px, calc(100% - 24px));
+      }
+
+      .home-page .hero-copy {
+        padding: 28px 0 32px;
+      }
+
+      .home-page .hero-title {
+        font-size: 32px;
+      }
+
+      .home-page .hero-copy p {
+        font-size: 16px;
+      }
+
+      .home-page .hero-media img {
+        height: 180px;
+      }
+
+      .home-page .hero-copy .cta-row .btn:not(.primary) {
+        display: none;
+      }
+
+      .home-page .cta-row,
+      .home-page .contact-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .home-page .cta-row .btn,
+      .home-page .contact-actions .btn {
+        width: 100%;
+      }
+
+      .home-page .section-title {
+        font-size: 32px;
+      }
+
+      .home-page .mobile-sticky-cta a[href^="tel:"] {
+        display: none;
+      }
+    }
+  </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -51,202 +937,187 @@
       </span>
     </a>
     <div class="header-actions">
-      <nav class="nav" aria-label="주요 메뉴">
+            <nav class="nav" aria-label="주요 메뉴">
         <a href="products.html">상품안내</a>
+        <a href="quote.html">맞춤견적</a>
         <a href="shipping.html">거래안내</a>
         <a href="contact.html">문의/오시는 길</a>
       </nav>
       <a class="btn primary header-cta" href="quote.html">맞춤견적 요청</a>
     </div>
   </div>
-  <div class="mobile-nav" id="mobileNav" data-mobile-nav>
+    <div class="mobile-nav" id="mobileNav" data-mobile-nav>
     <div class="container">
-      <a href="products.html">상품안내</a>
-      <a href="shipping.html">거래안내</a>
-      <a href="contact.html">문의/오시는 길</a>
-      <a href="quote.html">맞춤견적 요청</a>
+<a href="products.html">상품안내</a>
+<a href="quote.html">맞춤견적</a>
+<a href="shipping.html">거래안내</a>
+<a href="contact.html">문의/오시는 길</a>
     </div>
   </div>
 </header>
-<section class="hero">
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <div class="section-label">포장자재 공급</div>
-      <h1 class="hero-title">박스와 골판지, 포장자재를<br>필요한 방식에 맞춰 안내합니다.</h1>
-      <p>규격이 정해진 품목은 바로 견적을 요청하실 수 있고, 사양이 미정인 품목은 맞춤 상담으로 진행하실 수 있습니다. 제작과정과 납기, 단가 기준은 아래 빠른 선택에서 바로 확인하실 수 있습니다.</p>
-      <div class="cta-row">
-        <a class="btn primary" href="quote.html">맞춤견적 요청</a>
-        <a class="btn" href="products.html">상품안내 보기</a>
-      </div>
-      <div class="hero-subinfo">
-        <p class="help">규격이 미정이어도 품목과 용도만 알려주시면 상담부터 진행하실 수 있습니다.</p>
-      </div>
-    </div>
-    <figure class="hero-media">
-      <img src="assets/images/home/storefront-hero.jpg" alt="신신지업사 매장 전경">
-    </figure>
-  </div>
-</section>
-<section class="section-tight">
-  <div class="container quick-route-shell">
-    <div class="quick-route-intro">
-      <div class="section-label">빠른 선택</div>
-      <h2 class="section-title">필요한 안내를 바로 선택해 주세요</h2>
-      <p class="section-lead">기성품 견적, 맞춤 상담, 제작·납기 안내 중 필요한 항목으로 바로 이동하실 수 있습니다.</p>
-    </div>
-    <div class="hero-route-grid" aria-label="빠른 문의 선택">
-      <a class="hero-route-card" href="products.html#corrugated-box">
-        <strong>기성품 견적</strong>
-        <p>택배박스와 규격 골판지를 먼저 확인하고 바로 견적을 요청합니다.</p>
-        <span>택배박스 / 골판지 보기</span>
-      </a>
-      <a class="hero-route-card" href="products.html#custom-items">
-        <strong>맞춤 상담</strong>
-        <p>D형박스, 맞춤 제작처럼 사양 확인이 필요한 항목을 상담합니다.</p>
-        <span>맞춤 상담 안내로 이동</span>
-      </a>
-      <a class="hero-route-card" href="product-27-faq.html">
-        <strong>제작·납기 안내</strong>
-        <p>제작과정, 진행 일정, 단가 기준을 먼저 읽고 문의하실 수 있습니다.</p>
-        <span>안내 페이지 보기</span>
-      </a>
-    </div>
-  </div>
-</section>
-<section class="section-tight">
-  <div class="container trust-strip">
-    <div class="trust-item"><strong>방문수령 가능</strong><p>전화로 수량과 준비 여부를 확인한 뒤 방문수령하실 수 있습니다.</p></div>
-    <div class="trust-item"><strong>기성품 1~3일</strong><p>재고와 작업 일정에 따라 기본 출고 일정을 안내합니다.</p></div>
-    <div class="trust-item"><strong>퀵·택배·방문수령</strong><p>품목 특성과 납품 방식에 맞춰 가능한 방법을 안내합니다.</p></div>
-    <div class="trust-item"><strong>세금계산서 가능</strong><p>필요 자료 확인 후 발행 절차를 안내합니다.</p></div>
-  </div>
-</section>
-<section class="section-tight">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <div class="section-label">품목 분류</div>
-        <h2 class="section-title">주요 취급 품목</h2>
-      </div>
-    </div>
-    <div class="category-grid">
-      <a class="category-card" href="products.html#corrugated-box"><h3>택배박스</h3><p>기성 규격 위주의 택배박스를 확인하고 견적을 요청하실 수 있습니다.</p></a>
-      <a class="category-card" href="products.html#d-box"><h3>D형박스</h3><p>규격과 수량을 먼저 확인한 뒤 맞춤 제작 여부를 상담합니다.</p></a>
-      <a class="category-card" href="products.html#double-wall"><h3>골판지(양면)</h3><p>양면 골판지 규격과 골 종류를 확인해 안내합니다.</p></a>
-      <a class="category-card" href="products.html#single-wall"><h3>골판지(편면)</h3><p>편면 골판지와 보조 자재는 필요한 규격을 기준으로 상담합니다.</p></a>
-    </div>
-  </div>
-</section>
-<section class="section-tight">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <div class="section-label">대표 품목</div>
-        <h2 class="section-title">대표 품목 / 상담 미리보기</h2>
-      </div>
-      <a class="btn utility" href="products.html">전체 제품 보기</a>
-    </div>
-    <div class="featured-grid">
-      <article class="feature-card">
-        <div class="badges"><span class="badge strong">택배박스</span></div>
-        <h3>택배박스 B-600</h3>
-        <div class="feature-meta">
-          <div><span class="meta-label">핵심 규격</span><span class="meta-value">600×400×400 / D/W BOX</span></div>
-          <div><span class="meta-label">최소수량</span><span class="meta-value">10개부터</span></div>
-          <div><span class="meta-label">리드타임</span><span class="meta-value">기성품 1~3일</span></div>
-          <div><span class="meta-label">단가</span><span class="feature-price">2,800원</span></div>
+<main>
+  <section class="home-hero" aria-labelledby="homeHeroTitle">
+    <div class="container hero-layout">
+      <div class="hero-copy">
+        <div class="section-label">포장자재 공급</div>
+        <h1 class="hero-title" id="homeHeroTitle">박스와 골판지,<br>필요한 방식에 맞춰<br>안내합니다.</h1>
+        <p>규격품 견적과 맞춤 제작 상담을<br>품목·수량 기준으로 확인합니다.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="quote.html">맞춤견적 요청</a>
+          <a class="btn" href="products.html">상품안내 보기</a>
         </div>
-        <div class="cta-row"><a class="btn small" href="product-01-b-600.html">상세</a><a class="btn primary small" href="quote.html">견적요청</a></div>
-      </article>
-      <article class="feature-card guide-feature-card">
-        <div class="badges"><span class="badge strong">D형박스</span><span class="badge">상담 안내</span></div>
-        <h3>D형박스 맞춤 상담</h3>
-        <div class="feature-meta">
-          <div><span class="meta-label">진행 기준</span><span class="meta-value">규격 · 수량 확인 후 진행</span></div>
-          <div><span class="meta-label">확인 항목</span><span class="meta-value">골 종류 · 용도 · 납품 방식</span></div>
-          <div><span class="meta-label">문의 성격</span><span class="meta-value">맞춤 제작 상담</span></div>
+        <div class="hero-subinfo">
+          <p class="help">규격이 미정이어도 품목과 용도만 알려주시면 상담부터 진행하실 수 있습니다.</p>
         </div>
-        <div class="cta-row"><a class="btn small" href="products.html#d-box">안내</a><a class="btn primary small" href="quote.html?inquiry_mode=general&amp;item_category=D%ED%98%95%EB%B0%95%EC%8A%A4&amp;item_name=D%ED%98%95%EB%B0%95%EC%8A%A4%20%EB%A7%9E%EC%B6%A4%20%EC%83%81%EB%8B%B4">문의하기</a></div>
-      </article>
-      <article class="feature-card">
-        <div class="badges"><span class="badge strong">골판지(양면)</span></div>
-        <h3>골판지 G-DW</h3>
-        <div class="feature-meta">
-          <div><span class="meta-label">핵심 규격</span><span class="meta-value">1580×1100 / DW(A골+B골)</span></div>
-          <div><span class="meta-label">최소수량</span><span class="meta-value">10개부터</span></div>
-          <div><span class="meta-label">리드타임</span><span class="meta-value">상담 후 안내</span></div>
-          <div><span class="meta-label">단가</span><span class="feature-price">4,000원</span></div>
-        </div>
-        <div class="cta-row"><a class="btn small" href="product-11-g-dw.html">상세</a><a class="btn primary small" href="quote.html">견적요청</a></div>
-      </article>
-      <article class="feature-card">
-        <div class="badges"><span class="badge strong">골판지(편면)</span></div>
-        <h3>골판지 ITEM-25</h3>
-        <div class="feature-meta">
-          <div><span class="meta-label">핵심 규격</span><span class="meta-value">1100×800 / 편면(KLB)</span></div>
-          <div><span class="meta-label">최소수량</span><span class="meta-value">10개부터</span></div>
-          <div><span class="meta-label">리드타임</span><span class="meta-value">상담 후 안내</span></div>
-          <div><span class="meta-label">단가</span><span class="feature-price">1,500원</span></div>
-        </div>
-        <div class="cta-row"><a class="btn small" href="product-20-item-25.html">상세</a><a class="btn primary small" href="quote.html">견적요청</a></div>
-      </article>
+      </div>
+      <figure class="hero-media">
+        <img src="assets/images/home/storefront-hero.jpg" alt="신신지업사 매장 전경">
+      </figure>
     </div>
-  </div>
-</section>
-<section class="section-tight">
-  <div class="container">
-    <div class="section-head compact">
-      <div>
-        <div class="section-label">진행 순서</div>
-        <h2 class="section-title">맞춤 제작 / 주문 흐름</h2>
+  </section>
+  <section aria-label="거래 신뢰 정보">
+    <div class="container trust-strip">
+      <div class="trust-item"><strong>방문수령 가능</strong><p>전화로 수량과 준비 여부를 확인한 뒤 방문수령하실 수 있습니다.</p></div>
+      <div class="trust-item"><strong>기성품 1~3일</strong><p>재고와 작업 일정에 따라 기본 출고 일정을 안내합니다.</p></div>
+      <div class="trust-item"><strong>퀵·택배·방문수령</strong><p>품목 특성과 납품 방식에 맞춰 가능한 방법을 안내합니다.</p></div>
+      <div class="trust-item"><strong>세금계산서 가능</strong><p>필요 자료 확인 후 발행 절차를 안내합니다.</p></div>
+    </div>
+  </section>
+  <section aria-labelledby="categoryTitle">
+    <div class="container">
+      <div class="section-head compact">
+        <div>
+          <div class="section-label">품목 분류</div>
+          <h2 class="section-title" id="categoryTitle">주요 취급 품목</h2>
+        </div>
+      </div>
+      <div class="category-grid">
+        <a class="category-card" href="products.html#corrugated-box"><h3>택배박스</h3><p>기성 규격 위주의 택배박스를 확인하고 견적을 요청하실 수 있습니다.</p></a>
+        <a class="category-card" href="products.html#d-box"><h3>D형박스</h3><p>규격과 수량을 먼저 확인한 뒤 맞춤 제작 여부를 상담합니다.</p></a>
+        <a class="category-card" href="products.html#double-wall"><h3>골판지(양면)</h3><p>양면 골판지 규격과 골 종류를 확인해 안내합니다.</p></a>
+        <a class="category-card" href="products.html#single-wall"><h3>골판지(편면)</h3><p>편면 골판지와 보조 자재는 필요한 규격을 기준으로 상담합니다.</p></a>
       </div>
     </div>
-    <div class="process-grid">
-      <article class="process-card"><div class="process-number">01</div><h3>문의</h3><p>품목, 규격, 수량, 납품 방식을 알려주시면 확인을 시작합니다.</p></article>
-      <article class="process-card"><div class="process-number">02</div><h3>사양 확인</h3><p>규격과 재질, 수량, 제작 여부를 정리해 견적을 안내합니다.</p></article>
-      <article class="process-card"><div class="process-number">03</div><h3>입금 확인</h3><p>안내된 방식으로 결제가 확인되면 작업 또는 출고를 준비합니다.</p></article>
-      <article class="process-card"><div class="process-number">04</div><h3>제작 / 출고</h3><p>기성품 출고 또는 맞춤 제작 후 택배, 퀵, 방문수령으로 진행합니다.</p></article>
-    </div>
-  </div>
-</section>
-<section class="section-tight">
-  <div class="container support-summary-grid">
-    <article class="support-card"><h3>배송비</h3><p>기본 착불이며 품목과 지역에 따라 별도 협의할 수 있습니다.</p></article>
-    <article class="support-card"><h3>결제 안내</h3><p>카드 결제는 지원하지 않으며, 주문 전 결제 방식은 별도로 안내합니다.</p></article>
-    <article class="support-card"><h3>주문 안내</h3><p>제작과정, 진행 일정, 단가 확인이 필요하시면 안내 페이지를 먼저 확인하실 수 있습니다.</p><a class="btn utility small" href="product-27-faq.html">안내 보기</a></article>
-  </div>
-</section>
-<section class="section-tight">
-  <div class="container">
-    <div class="section-head compact">
-      <div>
-        <div class="section-label">현장 사진</div>
-        <h2 class="section-title">현장 사진 / 실물 참고</h2>
+  </section>
+  <section aria-labelledby="featuredTitle">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-label">대표 품목</div>
+          <h2 class="section-title" id="featuredTitle">대표 품목 / 상담 미리보기</h2>
+        </div>
+        <a class="btn utility" href="products.html">전체 제품 보기</a>
+      </div>
+      <div class="featured-grid">
+        <article class="feature-card">
+          <div class="badges"><span class="badge strong">택배박스</span></div>
+          <h3>택배박스 B-600</h3>
+          <div class="feature-meta">
+            <div><span class="meta-label">핵심 규격</span><span class="meta-value">600×400×400 / D/W BOX</span></div>
+            <div><span class="meta-label">최소수량</span><span class="meta-value">10개부터</span></div>
+            <div><span class="meta-label">리드타임</span><span class="meta-value">기성품 1~3일</span></div>
+            <div><span class="meta-label">단가</span><span class="feature-price">2,800원</span></div>
+          </div>
+          <div class="cta-row"><a class="btn small" href="product-01-b-600.html">상세</a><a class="btn primary small" href="quote.html">견적요청</a></div>
+        </article>
+        <article class="feature-card guide-feature-card">
+          <div class="badges"><span class="badge strong">D형박스</span><span class="badge">상담 안내</span></div>
+          <h3>D형박스 맞춤 상담</h3>
+          <div class="feature-meta">
+            <div><span class="meta-label">진행 기준</span><span class="meta-value">규격 · 수량 확인 후 진행</span></div>
+            <div><span class="meta-label">확인 항목</span><span class="meta-value">골 종류 · 용도 · 납품 방식</span></div>
+            <div><span class="meta-label">문의 성격</span><span class="meta-value">맞춤 제작 상담</span></div>
+          </div>
+          <div class="cta-row"><a class="btn small" href="products.html#d-box">안내</a><a class="btn primary small" href="quote.html?inquiry_mode=general&amp;item_category=D%ED%98%95%EB%B0%95%EC%8A%A4&amp;item_name=D%ED%98%95%EB%B0%95%EC%8A%A4%20%EB%A7%9E%EC%B6%A4%20%EC%83%81%EB%8B%B4">문의하기</a></div>
+        </article>
+        <article class="feature-card">
+          <div class="badges"><span class="badge strong">골판지(양면)</span></div>
+          <h3>골판지 G-DW</h3>
+          <div class="feature-meta">
+            <div><span class="meta-label">핵심 규격</span><span class="meta-value">1580×1100 / DW(A골+B골)</span></div>
+            <div><span class="meta-label">최소수량</span><span class="meta-value">10개부터</span></div>
+            <div><span class="meta-label">리드타임</span><span class="meta-value">상담 후 안내</span></div>
+            <div><span class="meta-label">단가</span><span class="feature-price">4,000원</span></div>
+          </div>
+          <div class="cta-row"><a class="btn small" href="product-11-g-dw.html">상세</a><a class="btn primary small" href="quote.html">견적요청</a></div>
+        </article>
+        <article class="feature-card">
+          <div class="badges"><span class="badge strong">골판지(편면)</span></div>
+          <h3>골판지 ITEM-25</h3>
+          <div class="feature-meta">
+            <div><span class="meta-label">핵심 규격</span><span class="meta-value">1100×800 / 편면(KLB)</span></div>
+            <div><span class="meta-label">최소수량</span><span class="meta-value">10개부터</span></div>
+            <div><span class="meta-label">리드타임</span><span class="meta-value">상담 후 안내</span></div>
+            <div><span class="meta-label">단가</span><span class="feature-price">1,500원</span></div>
+          </div>
+          <div class="cta-row"><a class="btn small" href="product-20-item-25.html">상세</a><a class="btn primary small" href="quote.html">견적요청</a></div>
+        </article>
       </div>
     </div>
-    <div class="photo-grid">
-      <article class="photo-card"><img src="assets/images/home/storefront-hero.jpg" alt="신신지업사 매장 전경"><div class="photo-card-body"><h3>매장 전경</h3><p>방산시장 내 매장 외부 모습입니다.</p></div></article>
-      <article class="photo-card"><img src="assets/images/home/interior-stock.jpg" alt="신신지업사 창고 전경"><div class="photo-card-body"><h3>창고 전경</h3><p>재고 및 보관 현황을 확인하실 수 있습니다.</p></div></article>
-      <article class="photo-card"><img src="assets/images/home/sample-boxes.jpg" alt="박스 샘플 적재 사진"><div class="photo-card-body"><h3>박스 샘플</h3><p>취급 품목의 실제 샘플과 적재 모습입니다.</p></div></article>
-    </div>
-  </div>
-</section>
-<section class="section-tight">
-  <div class="container contact-shell">
-    <div class="section-head compact">
-      <div>
-        <div class="section-label">문의 안내</div>
-        <h2 class="section-title">문의 / 오시는 길</h2>
+  </section>
+  <section aria-labelledby="processTitle">
+    <div class="container">
+      <div class="section-head compact">
+        <div>
+          <div class="section-label">진행 순서</div>
+          <h2 class="section-title" id="processTitle">맞춤 제작 / 주문 흐름</h2>
+        </div>
+      </div>
+      <div class="process-grid">
+        <article class="process-card"><div class="process-number">01</div><h3>문의</h3><p>품목, 규격, 수량, 납품 방식을 알려주시면 확인을 시작합니다.</p></article>
+        <article class="process-card"><div class="process-number">02</div><h3>사양 확인</h3><p>규격과 재질, 수량, 제작 여부를 정리해 견적을 안내합니다.</p></article>
+        <article class="process-card"><div class="process-number">03</div><h3>입금 확인</h3><p>안내된 방식으로 결제가 확인되면 작업 또는 출고를 준비합니다.</p></article>
+        <article class="process-card"><div class="process-number">04</div><h3>제작 / 출고</h3><p>기성품 출고 또는 맞춤 제작 후 택배, 퀵, 방문수령으로 진행합니다.</p></article>
       </div>
     </div>
-    <div class="contact-card-grid">
-      <article class="contact-card"><h3>연락처</h3><div class="contact-list"><div class="phone-line"><span class="contact-label">전화번호</span><span class="contact-value phone-pair"><a href="tel:02-2269-4933">02-2269-4933</a><a href="tel:02-2268-9059">02-2268-9059</a></span></div><div><span class="contact-label">이메일</span><span class="contact-value"><a href="mailto:sinsin4933@gmail.com">sinsin4933@gmail.com</a></span></div></div></article>
-      <article class="contact-card"><h3>주소</h3><p class="address-fragments"><span>서울 중구 을지로35길 8</span><span>1층(방산시장 내)</span></p><div class="contact-actions"><a class="btn small" href="https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EC%9D%84%EC%A7%80%EB%A1%9C35%EA%B8%B8%208" target="_blank" rel="noopener noreferrer">네이버 지도</a><a class="btn small" href="https://map.kakao.com/?q=%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EC%9D%84%EC%A7%80%EB%A1%9C35%EA%B8%B8%208" target="_blank" rel="noopener noreferrer">카카오맵</a></div></article>
-      <article class="contact-card"><h3>영업시간</h3><p class="hours-fragments"><span>평일 08:00~18:00</span><span>토요일·공휴일 08:00~14:00</span><span>일요일 휴무</span></p></article>
-      <article class="contact-card"><h3>견적 문의</h3><p>규격과 수량이 정해지지 않아도 먼저 문의하실 수 있습니다.</p><div class="cta-row"><a class="btn primary small" href="quote.html">맞춤견적 요청</a></div></article>
+  </section>
+  <section aria-labelledby="transactionTitle">
+    <div class="container">
+      <div class="section-head compact">
+        <div>
+          <div class="section-label">거래 요약</div>
+          <h2 class="section-title" id="transactionTitle">거래 전 확인 사항</h2>
+        </div>
+      </div>
+      <div class="support-summary-grid">
+        <article class="support-card"><h3>배송비</h3><p>기본 착불이며 품목과 지역에 따라 별도 협의할 수 있습니다.</p></article>
+        <article class="support-card"><h3>결제 안내</h3><p>카드 결제는 지원하지 않으며, 주문 전 결제 방식은 별도로 안내합니다.</p></article>
+        <article class="support-card"><h3>주문 안내</h3><p>제작과정, 진행 일정, 단가 확인이 필요하시면 안내 페이지를 먼저 확인하실 수 있습니다.</p><a class="btn utility small" href="product-27-faq.html">안내 보기</a></article>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+  <section aria-labelledby="photoTitle">
+    <div class="container">
+      <div class="section-head compact">
+        <div>
+          <div class="section-label">현장 사진</div>
+          <h2 class="section-title" id="photoTitle">현장 사진 / 실물 참고</h2>
+        </div>
+      </div>
+      <div class="photo-grid">
+        <article class="photo-card"><img src="assets/images/home/storefront-hero.jpg" alt="신신지업사 매장 전경"><div class="photo-card-body"><h3>매장 전경</h3><p>방산시장 내 매장 외부 모습입니다.</p></div></article>
+        <article class="photo-card"><img src="assets/images/home/interior-stock.jpg" alt="신신지업사 창고 전경"><div class="photo-card-body"><h3>창고 전경</h3><p>재고 및 보관 현황을 확인하실 수 있습니다.</p></div></article>
+        <article class="photo-card"><img src="assets/images/home/board-types.jpg" alt="골판지 종류 실물 사진"><div class="photo-card-body"><h3>골판지 종류</h3><p>취급하는 골판지 재질과 색상을 실물로 확인하실 수 있습니다.</p></div></article>
+      </div>
+    </div>
+  </section>
+  <section aria-labelledby="contactTitle">
+    <div class="container contact-shell">
+      <div class="section-head compact">
+        <div>
+          <div class="section-label">문의 안내</div>
+          <h2 class="section-title" id="contactTitle">문의 / 오시는 길</h2>
+        </div>
+      </div>
+      <div class="contact-card-grid">
+        <article class="contact-card"><h3>연락처</h3><div class="contact-list"><div class="phone-line"><span class="contact-label">전화번호</span><span class="contact-value phone-pair"><a href="tel:02-2269-4933">02-2269-4933</a><a href="tel:02-2268-9059">02-2268-9059</a></span></div><div><span class="contact-label">이메일</span><span class="contact-value"><a href="mailto:sinsin4933@gmail.com">sinsin4933@gmail.com</a></span></div></div></article>
+        <article class="contact-card"><h3>주소</h3><p class="address-fragments"><span>서울 중구 을지로35길 8</span><span>1층(방산시장 내)</span></p><div class="contact-actions"><a class="btn small" href="https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EC%9D%84%EC%A7%80%EB%A1%9C35%EA%B8%B8%208" target="_blank" rel="noopener noreferrer">네이버 지도</a><a class="btn small" href="https://map.kakao.com/?q=%EC%84%9C%EC%9A%B8%20%EC%A4%91%EA%B5%AC%20%EC%9D%84%EC%A7%80%EB%A1%9C35%EA%B8%B8%208" target="_blank" rel="noopener noreferrer">카카오맵</a></div></article>
+        <article class="contact-card"><h3>영업시간</h3><p class="hours-fragments"><span>평일 08:00~18:00</span><span>토요일·공휴일 08:00~14:00</span><span>일요일 휴무</span></p></article>
+        <article class="contact-card"><h3>견적 문의</h3><p>규격과 수량이 정해지지 않아도 먼저 문의하실 수 있습니다.</p><div class="cta-row"><a class="btn primary small" href="quote.html">맞춤견적 요청</a></div></article>
+      </div>
+    </div>
+  </section>
+</main>
 <div class="mobile-sticky-cta" aria-label="모바일 문의">
   <a class="btn primary" href="quote.html">견적요청</a>
   <a class="btn" href="tel:02-2269-4933">전화문의</a>
