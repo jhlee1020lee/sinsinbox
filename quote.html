@@ -30,7 +30,7 @@
 <header class="header">
   <div class="container header-inner">
     <a class="brand" href="index.html" aria-label="신신지업사 홈">
-      <img class="brand-logo" src="assets/images/logo-transparent.png" alt="신신지업사">
+      <img class="brand-logo" src="assets/images/logo-transparent.webp" alt="신신지업사" width="528" height="136" loading="eager" decoding="async">
     </a>
     <div class="header-actions">
             <nav class="nav" aria-label="주요 메뉴">
@@ -65,7 +65,7 @@
     <div class="form-card">
       <h2>견적 요청서</h2>
       <p class="form-contact-note">폼 전송이 원활하지 않으면 이메일 또는 전화 문의로 바로 접수하실 수 있습니다.</p>
-      <form id="quoteForm" novalidate>
+      <form id="quoteForm" method="post" novalidate>
         <div class="form-group">
           <h3 class="form-group-title">문의 정보</h3>
           <div class="field" data-quote-field="mode">
@@ -104,12 +104,12 @@
           <label class="checkbox-row" for="quotePrivacy"><input id="quotePrivacy" type="checkbox" required><span>개인정보 수집 및 이용 안내를 확인했습니다. <a href="privacy.html">개인정보처리방침</a></span></label>
         </div>
         <div class="form-actions">
-          <button class="btn primary" type="submit" id="quoteSubmitButton">견적 요청 보내기</button>
+          <button class="btn primary" type="submit" id="quoteSubmitButton" aria-describedby="quoteFormStatus" disabled>견적 요청 보내기</button>
           <a class="btn utility" href="mailto:sinsin4933@gmail.com?subject=%EC%8B%A0%EC%8B%A0%EC%A7%80%EC%97%85%EC%82%AC%20%EA%B2%AC%EC%A0%81%20%EB%AC%B8%EC%9D%98">이메일 문의</a>
           <p class="form-contact-note"><span class="form-contact-label">전화문의:</span> <span class="phone-pair"><a href="tel:02-2269-4933">02-2269-4933</a><a href="tel:02-2268-9059">02-2268-9059</a></span></p>
         </div>
-        <noscript><p class="form-contact-note">브라우저 설정상 폼 전송이 되지 않을 수 있습니다. 전화 또는 이메일 문의를 이용해 주세요.</p></noscript>
-        <div id="quoteFormStatus" class="help" role="status" aria-live="polite"></div>
+        <noscript><p class="form-contact-note">온라인 견적 요청에는 JavaScript가 필요합니다. 전화 또는 이메일로 문의해 주세요.</p></noscript>
+        <div id="quoteFormStatus" class="help" role="status" aria-live="polite">온라인 견적 요청을 준비하고 있습니다. 전송 버튼이 활성화되지 않으면 전화 또는 이메일로 문의해 주세요.</div>
       </form>
     </div>
     <aside class="quote-card">

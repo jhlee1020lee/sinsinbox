@@ -852,8 +852,14 @@
     });
   }
 
+  let isSubmittingQuote = false;
+
   quoteForm.addEventListener('submit', async (event) => {
     event.preventDefault();
+
+    if (isSubmittingQuote) {
+      return;
+    }
 
     if (!quoteForm.reportValidity()) {
       setStatus('필수 항목을 먼저 확인해 주세요.', 'error');
@@ -888,6 +894,7 @@
       params.append(key, normalizedValue == null ? '' : normalizedValue);
     });
 
+    isSubmittingQuote = true;
     if (submitButton) {
       submitButton.disabled = true;
     }
@@ -927,6 +934,13 @@
         throw error;
       }
 
+      if (!result || result.ok !== true) {
+        const error = new Error('The server did not confirm receipt.');
+        error.type = 'server';
+        error.userMessage = '접수 여부를 확인하지 못했습니다. 입력 내용은 유지됩니다. 전화 또는 이메일로 접수 여부를 확인해 주세요.';
+        throw error;
+      }
+
       quoteForm.reset();
       resetSourcePageValue();
       syncQuoteFormMode();
@@ -947,9 +961,15 @@
         setStatus('전송 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요. 전송이 되지 않으면 전화 또는 이메일 문의를 이용해 주세요.', 'error');
       }
     } finally {
+      isSubmittingQuote = false;
       if (submitButton) {
         submitButton.disabled = false;
       }
     }
   });
+
+  setStatus('', 'success');
+  if (submitButton) {
+    submitButton.disabled = false;
+  }
 })();
